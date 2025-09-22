@@ -29,4 +29,4 @@ Cada chamado só pode estar associado a um setor por vez, ou seja, não é permi
 
 Esse processo de encaminhamento pode se repetir até que o setor correto assuma a responsabilidade e finalize a solução. Assim, o sistema deve manter um histórico de encaminhamentos do chamado entre setores. 
 
-Após a análise e correção, o setor responsável gera uma nova nota fiscal referente ao produto corrigido e o material é reenviado ao cliente. O sistema deve registrar qual setor solucionou o problema e qual foi a nota fiscal de
+Após a análise e correção, o setor responsável gera uma nova nota fiscal referente ao produto corrigido e o material é reenviado ao cliente. O sistema deve registrar qual setor solucionou o problema e qual foi a nota fiscal de substituição. 
