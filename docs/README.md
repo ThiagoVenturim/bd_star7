@@ -29,14 +29,14 @@ Na prática, o minimundo atua como uma ponte entre o problema real e o modelo co
 
 A empresa Star 7 atua no desenvolvimento de manuais, kits de bordo, livros e outros materiais gráficos. O presente projeto modela o sistema de Garantia, responsável pelo tratamento de chamados de clientes referentes a problemas nos produtos entregues. 
 
-Os clientes são empresas, identificados por CNPJ, e possuem também nome da empresa e outros dados de contato como e-mail. O cliente entra em contato com o setor de atendimento, informando o código da nota fiscal do produto, uma foto do defeito, uma observação descritiva e a data do que foi realizada o pedido .	 
+Os clientes identificados por, e possuem também nome da empresa e outros dados de contato como e-mail e nome da pessoa que fez a solicitação, os Clientes podem ser físicos identificados por CPF ou jurídicos por CNPJ e nome fantasia. O cliente entra em contato com o setor de atendimento, informando-os dados do produto: o código da nota fiscal do produto, uma foto do defeito, a data do que foi realizada o pedido, a quantidade e o id do produto e o nome .	 
 
-A garantia é acionada e deve ser anotado o nome do produto e a quantidade recebida somente após uma análise inicial do problema é encaminhado para o setor responsável. 
+O atendimento deve anotar a data que foram realizados o próprio atendimento, o nome e o Email do funcionário uma descrição textual do problema, e após encaminhar para o setor. 
 
-Os setores possuem nome e apenas um responsável por cada setor, o setor recebe o produto e o responsável deve analisar o problema e tomar as medidas necessárias.  Os setores envolvidos podem ser:  Kit de Bordo, Publicação Editorial, Publicação Técnica e Marketing. 
+Os setores possuem nome e apenas um responsável por cada setor com registro do Email, o setor recebe o produto e o responsável deve analisar o problema e tomar as medidas necessárias.  Os setores envolvidos podem ser:  Kit de Bordo, Publicação Editorial, Publicação Técnica e Marketing. 
 
 Cada chamado só pode estar associado a um setor por vez, ou seja, não é permitido que o mesmo problema seja registrado em dois setores simultaneamente. Entretanto, o setor que recebeu o chamado pode encaminhá-lo para outro setor caso identifique que o problema pertence a uma área diferente. Por exemplo, o setor de Kit de Bordo pode verificar que o defeito está no manual impresso e encaminhar o chamado para a Gráfica. 
 
 Esse processo de encaminhamento pode se repetir até que o setor correto assuma a responsabilidade e finalize a solução. Assim que finalizado o produto deve ser encaminhado para a devolução. 
 
- A devolução tem que ter uma data que foi solucionado, a forma de envio a medida adotada e as observações sobre a devolução e pôr fim a devolução encaminha para o cliente. 
+ A devolução tem que ter uma data que foi solucionado, a forma de envio a medida adotada e as observações sobre a devolução e pôr fim a devolução encaminha para o cliente se o cliente for jurídico deve ser gerado uma nova nota fiscal de devolução referenciando a antiga. O mesmo produto pode voltar N vezes para a garantia 
