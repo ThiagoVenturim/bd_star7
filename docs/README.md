@@ -107,4 +107,47 @@ A entidade Devolução registra o processo de retorno do produto após o atendim
 O modelo conceitual apresenta ainda a integração entre as entidades Cliente, Produto, Atendimento, Setor e Devolução, garantindo a rastreabilidade de todas as etapas do processo. A estrutura proposta oferece uma visão clara e organizada dos relacionamentos possibilitando o gerenciamento eficiente das informações de garantia. 
 
  
+    | Tipo               | Subtipo    | Rótulo                             | Descrição                                                                                                                                                     |
+| ------------------ | ---------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Entidade**       | Forte      | **Cliente**                        | Armazena os dados de identificação e contato dos solicitantes. Possui uma especialização disjunta e total em Pessoa Física e Pessoa Jurídica.                 |
+| **Entidade**       | Fraca      | **Físico**                         | Subtipo de Cliente que representa pessoas físicas, identificadas por CPF.                                                                                     |
+| **Entidade**       | Fraca      | **Jurídico**                       | Subtipo de Cliente que representa pessoas jurídicas, identificadas por CNPJ e Nome Fantasia.                                                                  |
+| **Entidade**       | Forte      | **Produto**                        | Representa os itens adquiridos pelos clientes, contendo id do produto, nome do produto, foto do produto, data do pedido, quantidade e número da nota fiscal.  |
+| **Entidade**       | Forte      | **Atendimento**                    | Registra as ocorrências relacionadas a problemas nos produtos. Contém data de atendimento, descrição do problema, nome e email do atendente.                  |
+| **Entidade**       | Forte      | **Setor**                          | Representa as áreas internas responsáveis pela análise dos atendimentos, contendo nome do setor, responsável e email do responsável.                          |
+| **Entidade**       | Forte      | **Devolução**                      | Registra o processo de retorno de produtos após o atendimento, com data de devolução, forma de envio, medida adotada, observações e exigência de nota fiscal. |
+| **Relacionamento** | 1:N        | **Cliente–Produto**                | Um cliente pode possuir vários produtos cadastrados.                                                                                                          |
+| **Relacionamento** | 1:N        | **Cliente–Atendimento**            | Cada atendimento está associado a um único cliente, mas um cliente pode ter vários atendimentos.                                                              |
+| **Relacionamento** | N:N        | **Atendimento–Produto**            | Um atendimento pode envolver um ou mais produtos relacionados a um cliente.                                                                                   |
+| **Relacionamento** | N:1        | **Atendimento–Setor**              | Vários atendimentos podem ser encaminhados para um mesmo setor.                                                                                               |
+| **Relacionamento** | 1:N        | **Atendimento–Devolução**          | Um mesmo atendimento pode gerar várias devoluções, conforme a necessidade.                                                                                    |
+| **Atributo**       | Chave      | **CPF**                            | Identificador único da entidade Físico.                                                                                                                       |
+| **Atributo**       | Chave      | **CNPJ**                           | Identificador único da entidade Jurídico.                                                                                                                     |
+| **Atributo**       | Simples    | **Nome do Solicitante**            | Nome completo do cliente.                                                                                                                                     |
+| **Atributo**       | Simples    | **Email**                          | Endereço eletrônico do cliente.                                                                                                                               |
+| **Atributo**       | Simples    | **Endereço**                       | Local de residência ou sede do cliente.                                                                                                                       |
+| **Atributo**       | Simples    | **Nome Fantasia**                  | Nome comercial da empresa (somente para Pessoa Jurídica).                                                                                                     |
+| **Atributo**       | Chave      | **ID Produto**                     | Identificador único do produto.                                                                                                                               |
+| **Atributo**       | Simples    | **Nome do Produto**                | Nome descritivo do produto.                                                                                                                                   |
+| **Atributo**       | Simples    | **Foto do Produto**                | Imagem ilustrativa do produto.                                                                                                                                |
+| **Atributo**       | Simples    | **Data do Pedido**                 | Data em que o produto foi adquirido.                                                                                                                          |
+| **Atributo**       | Simples    | **Quantidade**                     | Número de unidades do produto.                                                                                                                                |
+| **Atributo**       | Simples    | **Número da Nota Fiscal**          | Identificador fiscal do pedido.                                                                                                                               |
+| **Atributo**       | Simples    | **Data de Atendimento**            | Data em que o atendimento foi registrado.                                                                                                                     |
+| **Atributo**       | Simples    | **Descrição do Problema**          | Texto detalhando o problema relatado.                                                                                                                         |
+| **Atributo**       | Simples    | **Nome do Atendente**              | Nome do funcionário responsável pelo atendimento.                                                                                                             |
+| **Atributo**       | Simples    | **Email do Atendente**             | Endereço de e-mail do atendente.                                                                                                                              |
+| **Atributo**       | Simples    | **Nome do Setor**                  | Nome da área interna responsável pelo atendimento.                                                                                                            |
+| **Atributo**       | Simples    | **Responsável**                    | Nome do responsável pelo setor.                                                                                                                               |
+| **Atributo**       | Simples    | **Email do Responsável**           | Endereço de e-mail do responsável pelo setor.                                                                                                                 |
+| **Atributo**       | Simples    | **Data de Devolução**              | Data em que o produto foi devolvido.                                                                                                                          |
+| **Atributo**       | Simples    | **Forma de Envio**                 | Método de envio utilizado na devolução.                                                                                                                       |
+| **Atributo**       | Simples    | **Medida Adotada**                 | Ação tomada durante o processo de devolução.                                                                                                                  |
+| **Atributo**       | Simples    | **Observações da Devolução**       | Informações adicionais sobre a devolução.                                                                                                                     |
+| **Atributo**       | Simples    | **Exige Nota Fiscal de Devolução** | Indica se a devolução requer nota fiscal.                                                                                                                     |
+| **Restrição**      | Totalidade | **Cliente–Subtipos**               | Especialização disjunta e total: todo cliente é Físico ou Jurídico.                                                                                           |
+
+ 
 ---
+
+
