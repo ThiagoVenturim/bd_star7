@@ -69,17 +69,15 @@ Reconhecida pela qualidade e inovação, a Star7 é certificada com ISO 9001:201
 
 A empresa Star 7 atua no desenvolvimento de manuais, kits de bordo, livros e outros materiais gráficos. O presente projeto modela o sistema de Garantia, responsável pelo tratamento de chamados de clientes referentes a problemas nos produtos entregues. 
 
-Os clientes identificados por, e possuem também nome da empresa e outros dados de contato como e-mail e nome da pessoa que fez a solicitação, os Clientes podem ser físicos identificados por CPF ou jurídicos por CNPJ e nome fantasia. O cliente entra em contato com o setor de atendimento, informando-os dados do produto: o código da nota fiscal do produto, uma foto do defeito, a data do que foi realizada o pedido, a quantidade e o id do produto e o nome.	 
+O cliente é identificado por id do cliente, possuem também nome e e-mail do representante que entrou em contato e endereço do cliente, os Clientes podem ser físicos identificados por CPF ou jurídicos por CNPJ e nome fantasia. O cliente entra em contato com o setor de atendimento, informando-os dados do produto: id do produto, o código da nota fiscal do produto, uma foto do defeito, a data do que foi realizada o pedido, a quantidade o nome.	 
 
-O atendimento deve anotar a data que foram realizados o próprio atendimento, o nome e o Email do funcionário uma descrição textual do problema, e após encaminhar para o setor. 
+O atendimento é identificado por id do atendimento, deve anotar a data que foram realizados o próprio atendimento, o nome e o e-mail do funcionário que realizou e uma descrição textual do problema, e após encaminhar para o setor. 
 
 Os setores possuem nome e apenas um responsável por cada setor com registro do Email, o setor recebe o produto e o responsável deve analisar o problema e tomar as medidas necessárias.  Os setores envolvidos podem ser:  Kit de Bordo, Publicação Editorial, Publicação Técnica e Marketing. 
 
-Cada chamado só pode estar associado a um setor por vez, ou seja, não é permitido que o mesmo problema seja registrado em dois setores simultaneamente. Entretanto, o setor que recebeu o chamado pode encaminhá-lo para outro setor caso identifique que o problema pertence a uma área diferente. Por exemplo, o setor de Kit de Bordo pode verificar que o defeito está no manual impresso e encaminhar o chamado para a Gráfica. 
+Cada chamado só pode estar associado a um setor por vez, ou seja, não é permitido que o mesmo problema seja registrado em dois setores simultaneamente. O responsável pelo setor deve solucionar o problema e encaminhar o produto para devolução.  
 
-Esse processo de encaminhamento pode se repetir até que o setor correto assuma a responsabilidade e finalize a solução. Assim que finalizado o produto deve ser encaminhado para a devolução. 
-
-A devolução tem que ter uma data que foi solucionado, a forma de envio a medida adotada e as observações sobre a devolução e pôr fim a devolução encaminha para o cliente se o cliente for jurídico deve ser gerado uma nova nota fiscal de devolução referenciando a antiga. O mesmo produto pode voltar N vezes para a garantia 
+ A devolução tem que ter uma data que foi solucionado, a forma de envio a medida adotada e as observações sobre a devolução e pôr fim a devolução encaminha para o cliente se o cliente for jurídico deve ser gerado uma nova nota fiscal de devolução referenciando a antiga. O mesmo produto pode voltar N vezes para a garantia 
 
  ---
 
@@ -93,21 +91,32 @@ Essa seção apresenta o projeto conceitual do SAM. Figura 1 apresenta o diagram
 
 ![alt text](imagens/ModeloConceitual.png)
 Figura 1- Modelo Conceitual  
+O modelo conceitual desenvolvido para o sistema de garantia da empresa Star 7 tem como objetivo representar de forma clara e estruturada todo o processo de garantia de produtos, abrangendo desde o registro do atendimento até a eventual devolução do item. A modelagem foi elaborada com base nas regras de negócio e requisitos funcionais identificados, buscando garantir rastreabilidade, integridade e eficiência no controle das informações. 
 
-A entidade Cliente armazena os dados de identificação e contato dos solicitantes. Ela possui uma especialização disjunta e total em Pessoa Física e Pessoa Jurídica, de forma que cada cliente pertence obrigatoriamente a um desses tipos. Clientes físicos são identificados por CPF, enquanto clientes jurídicos possuem CNPJ e Nome Fantasia. 
+A entidade Cliente armazena os dados de identificação e contato dos solicitantes, sendo composta pelos atributos id_cliente, nome_do_solicitante, email_do_solicitante e endereco. Essa entidade possui uma especialização disjunta e total em Pessoa Física e Pessoa Jurídica, de modo que cada cliente pertence obrigatoriamente a um desses tipos. Clientes físicos são identificados pelo CPF, enquanto clientes jurídicos possuem CNPJ e Nome Fantasia. Essa especialização permite diferenciar os tipos de clientes e tratar regras de negócio específicas, como a emissão de nota fiscal de devolução apenas para clientes jurídicos. 
 
-A entidade Produto representa os itens adquiridos pelos clientes, contendo atributos como id do produto, nome do produto, foto do produto, data do pedido, quantidade e número da nota fiscal. Existe um relacionamento 1:N entre Cliente e Produto, indicando que um cliente pode possuir vários produtos cadastrados. 
+A entidade Produto representa os itens adquiridos pelos clientes e é composta pelos atributos id_produto, nome_do_produto, foto_do_produto, data_do_pedido, quantidade e numero_da_nota_fiscal. Cada produto pode estar associado a diversos atendimentos ao longo do tempo, possibilitando o rastreamento do histórico de ocorrências e devoluções. O relacionamento entre Atendimento e Produto é de N:1, indicando que cada atendimento está vinculado a um único produto, mas um produto pode gerar vários atendimentos diferentes. 
 
-A entidade Atendimento registra as ocorrências relacionadas a problemas nos produtos, incluindo os atributos data de atendimento, descrição do problema, nome atendente e email atendente. Cada atendimento está associado a um único cliente, podendo envolver um ou mais produtos relacionados a esse cliente. 
+A entidade Atendimento é o núcleo central do sistema, responsável por registrar todas as ocorrências e interações com os clientes. Ela contém os atributos id_atendimento, data_de_atendimento, descricao_do_problema, nome_atendente e email_atendente. Cada atendimento está vinculado a um único cliente, possuindo uma relação 1:N entre Cliente e Atendimento, e também a um único setor, em uma relação N:1 entre Atendimento e Setor, além de envolver um produto específico. Essa modelagem permite que o sistema mantenha controle sobre quem abriu o chamado, qual produto foi afetado, quem realizou o atendimento e para qual setor o caso foi encaminhado. 
 
-A entidade Setor representa as áreas internas responsáveis por analisar os atendimentos. Ela contém os atributos nome setor, responsável e email responsável. O relacionamento entre Atendimento e Setor é de N:1, ou seja, vários atendimentos podem ser encaminhados para um mesmo setor. 
+A entidade Setor representa as áreas internas responsáveis pela análise dos atendimentos e pela tomada de decisões quanto às medidas corretivas. Ela possui os atributos nome_do_setor, responsavel_do_setor e email_responsavel. O relacionamento entre Atendimento e Setor é de N:1, uma vez que vários atendimentos podem ser direcionados a um mesmo setor, mas cada atendimento é tratado por apenas um setor por vez. 
 
-A entidade Devolução registra o processo de retorno do produto após o atendimento, com os atributos data de devolução, forma de envio, medida adotada, observações da devolução e exige nota fiscal devolução. O relacionamento entre Atendimento e Devolução é de 1:N, permitindo que um mesmo atendimento gere várias devoluções, conforme a necessidade. 
+A entidade Devolução registra o processo de retorno dos produtos após o atendimento. Ela inclui os atributos data_de_devolucao, forma_de_envio, medida_adotada e observacoes_da_devolucao. O relacionamento entre Atendimento e Devolução é de 1:N, permitindo que um mesmo atendimento gere várias devoluções quando necessário, conforme o produto passe mais de uma vez pelo processo de garantia. 
 
-O modelo conceitual apresenta ainda a integração entre as entidades Cliente, Produto, Atendimento, Setor e Devolução, garantindo a rastreabilidade de todas as etapas do processo. A estrutura proposta oferece uma visão clara e organizada dos relacionamentos possibilitando o gerenciamento eficiente das informações de garantia. 
+O modelo conceitual proposto integra de forma coesa as entidades Cliente, Produto, Atendimento, Setor e Devolução, garantindo a rastreabilidade completa do fluxo de atendimento e devolução de produtos. Essa estrutura proporciona uma visão clara, organizada e eficiente do processo de garantia, desde o registro da ocorrência até a resolução final. 
+
+O Atendimento foi modelado como uma entidade porque possui existência e atributos próprios, que não pertencem diretamente nem ao cliente nem ao produto. Conceitualmente, um relacionamento se torna uma entidade quando o evento que ele representa tem significado independente e precisa armazenar informações adicionais. No contexto da empresa Star 7, o atendimento não é apenas a ligação entre Cliente e Produto, mas um evento de negócio completo, que contém dados como a data e hora em que ocorreu, o nome e o e-mail do atendente, a descrição do problema, o setor responsável e o histórico de devoluções geradas. Assim, o atendimento representa uma ocorrência real que precisa ser registrada, monitorada e atualizada de forma individual. Se fosse modelado apenas como um relacionamento entre Cliente e Produto, informações importantes ficariam sem local adequado para armazenamento, comprometendo o controle do ciclo de vida de cada chamado. 
+
+Portanto, o Atendimento é corretamente representado como uma entidade fraca de processo ou evento, central no modelo, pois conecta e documenta todas as interações entre Cliente, Produto, Setor e Devolução dentro do sistema de garantia. Essa estrutura garante uma visão integrada de todos os processos da empresa, controle histórico dos atendimentos e devoluções, rastreabilidade completa de cada produto, organização eficiente das informações de clientes e setores e facilidade para futuras expansões do sistema. 
+
+O modelo também reflete regras de negócio essenciais, como a obrigatoriedade de cada cliente ser físico ou jurídico, a possibilidade de um produto gerar múltiplos atendimentos, a existência de um único setor responsável por cada caso e a possibilidade de um atendimento originar diversas devoluções. Além disso, o modelo assegura que um atendimento sempre esteja vinculado a um cliente e a um produto, reforçando a integridade referencial. 
+
+Por fim, o modelo conceitual do sistema de garantia da empresa Star 7 oferece uma base sólida para a futura implementação do modelo lógico e físico do banco de dados, promovendo organização, rastreabilidade e suporte à tomada de decisão em todas as etapas do processo de garantia. 
 
  
-    | Tipo               | Subtipo    | Rótulo                             | Descrição                                                                                                                                                     |
+
+ 
+| Tipo               | Subtipo    | Rótulo                             | Descrição                                                                                                                                                     |
 | ------------------ | ---------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Entidade**       | Forte      | **Cliente**                        | Armazena os dados de identificação e contato dos solicitantes. Possui uma especialização disjunta e total em Pessoa Física e Pessoa Jurídica.                 |
 | **Entidade**       | Fraca      | **Físico**                         | Subtipo de Cliente que representa pessoas físicas, identificadas por CPF.                                                                                     |
