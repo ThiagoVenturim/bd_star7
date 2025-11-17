@@ -34,3 +34,23 @@ CREATE TABLE Setor(
     responsavel  VARCHAR(100)  NOT NULL,
     email_do_responsavel VARCHAR(100)  NOT NULL
 );
+
+CREATE TABLE Atendimento (
+    id_atendimento int PRIMARY KEY NOT NULL,
+    numero_da_nota_fiscal int FOREIGN KEY NOT NULL,
+    id_cliente int FOREIGN KEY NOT NULL,
+    id_setor int FOREIGN KEY NOT NULL,
+    descricao_cliente VARCHAR(100),
+    email_atendimento VARCHAR(100),
+    data_do_atendimento DATE,
+    nome_atendente VARCHAR(100),
+);
+
+CREATE TABLE Devolucao (
+    id_setor int FOREIGN KEY NOT NULL,
+    id_atendimento int FOREIGN KEY NOT NULL,
+    forma_do_envio VARCHAR(100),
+    oberservacoes_da_devolucao VARCHAR(100),
+    data_de_devolucao DATE,
+    medida_adotada VARCHAR(100),
+);
