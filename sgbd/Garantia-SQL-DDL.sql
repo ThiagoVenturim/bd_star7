@@ -1,16 +1,15 @@
-
-USE DATABASE Garantia;
+use garantia;
 
 CREATE TABLE Cliente (
-    cod_cliente INT PRIMARY KEY,
+    cod_cliente INT PRIMARY KEY AUTO_INCREMENT,
     tipo_cliente ENUM('F', 'J') NOT NULL, 
     nome_solicitante VARCHAR(100) NOT NULL,
     email_solicitante VARCHAR(100) NOT NULL,
-    rua VARCHAR(100)  ,
-    endereco VARCHAR(100)  ,
-    bairro VARCHAR(50) ,
-    cpf int UNIQUE,
-    cnpj int UNIQUE,
+    rua VARCHAR(100),
+    endereco VARCHAR(100),
+    bairro VARCHAR(50),
+    cpf VARCHAR(14) UNIQUE,
+    cnpj VARCHAR(18) UNIQUE,
     nome_fantasia VARCHAR(100),
 
     CONSTRAINT chk_documento CHECK (
@@ -19,38 +18,46 @@ CREATE TABLE Cliente (
     )
 );
 
-CREATE TABLE Produto(
-    numero_da_nota_fiscal int PRIMARY KEY NOT NULL,
-    id_produto INT PRIMARY KEY,
+CREATE TABLE Setor(
+    id_setor INT PRIMARY KEY AUTO_INCREMENT,
+    nome_setor VARCHAR(100) UNIQUE NOT NULL,
+    responsavel VARCHAR(100) NOT NULL,
+    email_do_responsavel VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Produto (
+    id_produto INT PRIMARY KEY AUTO_INCREMENT,
+    numero_da_nota_fiscal VARCHAR(50) NOT NULL UNIQUE,
     nome_do_produto VARCHAR(100) NOT NULL,
     quantidade INT NOT NULL,
     data_da_entrega DATE,
-    foto_do_produto VARBINARY(MAX) --Nao existe VARBINARY(MAX) nem BLOB nem nada, tem que ser por link
-);
-
-CREATE TABLE Setor(
-    id_setor int PRIMARY KEY NOT NULL,
-    nome_setor VARCHAR(100) UNIQUE NOT NULL,
-    responsavel  VARCHAR(100)  NOT NULL,
-    email_do_responsavel VARCHAR(100)  NOT NULL
+    foto_do_produto VARCHAR(255)   -- link da imagem
 );
 
 CREATE TABLE Atendimento (
-    id_atendimento int PRIMARY KEY NOT NULL,
-    numero_da_nota_fiscal int FOREIGN KEY NOT NULL,
-    id_cliente int FOREIGN KEY NOT NULL,
-    id_setor int FOREIGN KEY NOT NULL,
-    descricao_cliente VARCHAR(100),
+    id_atendimento INT PRIMARY KEY AUTO_INCREMENT,
+    numero_da_nota_fiscal VARCHAR(50) NOT NULL,
+    cod_cliente INT NOT NULL,
+    id_setor INT NOT NULL,
+    descricao_cliente VARCHAR(255),
     email_atendimento VARCHAR(100),
     data_do_atendimento DATE,
     nome_atendente VARCHAR(100),
+
+    FOREIGN KEY (numero_da_nota_fiscal) REFERENCES Produto(numero_da_nota_fiscal),
+    FOREIGN KEY (cod_cliente) REFERENCES Cliente(cod_cliente),
+    FOREIGN KEY (id_setor) REFERENCES Setor(id_setor)
 );
 
 CREATE TABLE Devolucao (
-    id_setor int FOREIGN KEY NOT NULL,
-    id_atendimento int FOREIGN KEY NOT NULL,
+    id_devolucao INT PRIMARY KEY AUTO_INCREMENT,
+    id_atendimento INT NOT NULL,
+    id_setor INT NOT NULL,
     forma_do_envio VARCHAR(100),
-    oberservacoes_da_devolucao VARCHAR(100),
-    data_de_devolucao DATE,
+    observacoes_da_devolucao VARCHAR(255),
+    data_da_devolucao DATE,
     medida_adotada VARCHAR(100),
+
+    FOREIGN KEY (id_atendimento) REFERENCES Atendimento(id_atendimento),
+    FOREIGN KEY (id_setor) REFERENCES Setor(id_setor)
 );
