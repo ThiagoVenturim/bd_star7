@@ -2,13 +2,13 @@
 USE DATABASE Garantia;
 
 CREATE TABLE Cliente (
-    cod_cliente INT PRIMARY KEY AUTO_INCREMENT,
+    cod_cliente INT PRIMARY KEY,
     tipo_cliente ENUM('F', 'J') NOT NULL, 
     nome_solicitante VARCHAR(100) NOT NULL,
     email_solicitante VARCHAR(100) NOT NULL,
     rua VARCHAR(100)  ,
     endereco VARCHAR(100)  ,
-    bairro VARCHAR(50)  ,
+    bairro VARCHAR(50) ,
     cpf int UNIQUE,
     cnpj int UNIQUE,
     nome_fantasia VARCHAR(100),
@@ -20,12 +20,12 @@ CREATE TABLE Cliente (
 );
 
 CREATE TABLE Produto(
-    numero_da_nota_fiscal int PRIMARY KEY NOT NULL;
-    id_produto INT PRIMARY KEY AUTO_INCREMENT,
+    numero_da_nota_fiscal int PRIMARY KEY NOT NULL,
+    id_produto INT PRIMARY KEY,
     nome_do_produto VARCHAR(100) NOT NULL,
     quantidade INT NOT NULL,
     data_da_entrega DATE,
-    foto_do_produto VARBINARY(MAX);
+    foto_do_produto VARBINARY(MAX) --Nao existe VARBINARY(MAX) nem BLOB nem nada, tem que ser por link
 );
 
 CREATE TABLE Setor(
