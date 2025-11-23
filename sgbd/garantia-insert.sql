@@ -22,16 +22,16 @@ INSERT INTO Cliente (tipo_cliente, nome_solicitante, email_solicitante, rua, end
 
 --INSERINDO Produto
 INSERT INTO Produto (numero_da_nota_fiscal, nome_do_produto, quantidade, data_da_entrega, foto_do_produto) VALUES
-('NF-00100', 'Monitor 24pol LED', 1, '2023-10-01', ''), -- dps vai ser alterado com os links corretos
-('NF-00101', 'Teclado Mecânico RGB', 1, '2023-10-05', ''),
-('NF-00102', 'Notebook Gamer X1', 5, '2023-10-10', ''),
-('NF-00103', 'Mouse Sem Fio', 1, '2023-10-12', ''),
-('NF-00104', 'Cadeira Ergonômica', 2, '2023-10-15', ''),
-('NF-00105', 'Smartphone Pro 128GB', 1, '2023-10-20', ''),
-('NF-00106', 'Impressora Laser', 1, '2023-10-22', ''),
-('NF-00107', 'Fone de Ouvido BT', 1, '2023-10-25', ''),
-('NF-00108', 'Cabo HDMI 2.0', 10, '2023-10-28', ''),
-('NF-00109', 'Webcam Full HD', 1, '2023-10-30', '');
+('NF-00100', 'Livro Bernoulli', 1, '2023-10-01', ''), -- dps vai ser alterado com os links corretos
+('NF-00101', 'Manual Fiat - FIAT ARGO', 1, '2023-10-05', ''),
+('NF-00102', 'Manual Fiat - FIAT CRONOS', 5, '2023-10-10', ''),
+('NF-00103', 'Manual Fiat - FIAT DUCATO', 1, '2023-10-12', ''),
+('NF-00104', 'Manual Fiat - FIAT FASTBACK', 2, '2023-10-15', ''),
+('NF-00105', 'Manual Fiat - FIAT FIORINO', 1, '2023-10-20', ''),
+('NF-00106', 'Manual Fiat - FIAT MOBI', 1, '2023-10-22', ''),
+('NF-00107', 'Manual Fiat - FIAT PULSE', 1, '2023-10-25', ''),
+('NF-00108', 'Manual Fiat - FIAT SCUDO', 10, '2023-10-28', ''),
+('NF-00109', 'Manual Fiat - FIAT Toro', 1, '2023-10-30', '');
 
 --INSERINDO Atendimento
 INSERT INTO Atendimento (numero_da_nota_fiscal, cod_cliente, id_setor, descricao_cliente, email_atendimento, data_do_atendimento, nome_atendente) VALUES
