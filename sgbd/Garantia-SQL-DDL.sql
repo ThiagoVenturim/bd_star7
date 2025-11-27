@@ -26,8 +26,8 @@ CREATE TABLE Setor(
 );
 
 CREATE TABLE Produto (
-    id_produto INT PRIMARY KEY AUTO_INCREMENT,
-    numero_da_nota_fiscal VARCHAR(50) NOT NULL UNIQUE,
+    codigo_produto INT PRIMARY KEY,
+    numero_da_nota_fiscal VARCHAR(50) ,
     nome_do_produto VARCHAR(100) NOT NULL,
     quantidade INT NOT NULL,
     data_da_entrega DATE,
@@ -36,7 +36,7 @@ CREATE TABLE Produto (
 
 CREATE TABLE Atendimento (
     id_atendimento INT PRIMARY KEY AUTO_INCREMENT,
-    numero_da_nota_fiscal VARCHAR(50) NOT NULL,
+    codigo_produto INT  NOT NULL,
     cod_cliente INT NOT NULL,
     id_setor INT NOT NULL,
     descricao_cliente VARCHAR(255),
@@ -44,18 +44,18 @@ CREATE TABLE Atendimento (
     data_do_atendimento DATE,
     nome_atendente VARCHAR(100),
 
-    FOREIGN KEY (numero_da_nota_fiscal) REFERENCES Produto(numero_da_nota_fiscal),
+    FOREIGN KEY (codigo_produto) REFERENCES Produto(codigo_produto),
     FOREIGN KEY (cod_cliente) REFERENCES Cliente(cod_cliente),
     FOREIGN KEY (id_setor) REFERENCES Setor(id_setor)
 );
 
-CREATE TABLE Devolucao (
+CREATE TABLE Envio (
     id_devolucao INT PRIMARY KEY AUTO_INCREMENT,
     id_atendimento INT NOT NULL,
     id_setor INT NOT NULL,
     forma_do_envio VARCHAR(100),
-    observacoes_da_devolucao VARCHAR(255),
-    data_da_devolucao DATE,
+    observacoes_dO_envio VARCHAR(255),
+    data_da_envio DATE,
     medida_adotada VARCHAR(100),
 
     FOREIGN KEY (id_atendimento) REFERENCES Atendimento(id_atendimento),
