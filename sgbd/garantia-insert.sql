@@ -69,3 +69,26 @@ INSERT INTO Atendimento (codigo_produto, cod_cliente, id_setor, descricao_client
 (603534067, 15, 3, 'Erro ortográfico grosseiro na capa', 'midias.digitais@garantia.com', '2023-11-22', 'Fernanda Alves'),
 (603534068, 16, 2, 'Papel de gramatura inferior ao anunciado', 'producao.impressao@garantia.com', '2023-11-25', 'Roberto Dias'),
 (603534069, 16, 4, 'Veio modelo 2022, comprei 2023', 'qualidade@garantia.com', '2023-11-26', 'Mariana Lima');
+
+
+INSERT INTO Envio (id_atendimento, id_setor, forma_do_envio, observacoes_do_envio, data_do_envio, medida_adotada) VALUES
+(1, 4, 'Transportadora', 'Reenvio da unidade danificada por substituição', '2023-11-05', 'Reenvio de produto'),
+(2, 2, 'Correios - PAC', 'Envio de nova via impressa após conferência de qualidade', '2023-11-08', 'Substituição'),
+(3, 4, 'Retirada em loja', 'Cliente autorizou retirada de 2 unidades faltantes na filial', '2023-11-07', 'Envio complementar'),
+(4, 4, 'Transportadora', 'Coleta do item incorreto para devolução e substituição', '2023-11-09', 'Substituição'),
+(5, 2, 'Transportadora', 'Reimpressão das páginas afetadas e envio por urgência', '2023-11-10', 'Reenvio de produto'),
+(6, 2, 'Transportadora', 'Encaminhado para encadernação reforçada e reenvio', '2023-11-11', 'Reenvio de produto'),
+(7, 4, 'Transportadora', 'Produto enviado seco após secagem e revisão', '2023-11-10', 'Reenvio de produto'),
+(8, 4, 'Transportadora', 'Proteção adicional na embalagem e novo envio', '2023-11-12', 'Reenvio de produto'),
+(9, 2, 'Retirada em loja', 'Envio do encarte faltante separadamente', '2023-11-13', 'Envio complementar'),
+(10, 3, 'Transportadora', 'Reimpressão corrigida das páginas com problema de cores', '2023-11-14', 'Substituição'),
+(11, 4, 'Transportadora', 'Produto recolhido para análise (cliente recebeu outra referência)', '2023-11-16', 'Coleta para análise'),
+(12, 4, 'Transportadora', 'Coleta e análise — possível troca por lote correto', '2023-11-16', 'Coleta para análise'),
+(13, 3, 'Correios - Sedex', 'Envio da versão corrigida do gabarito', '2023-11-18', 'Substituição'),
+(14, 4, 'Transportadora', 'Livro inspecionado; possível reembolso se confirmar uso', '2023-11-20', 'Aguardando verificação / Reembolso'),
+(15, 2, 'Transportadora', 'Reimpressão do diagrama e remessa', '2023-11-22', 'Reenvio de produto'),
+(16, 3, 'Retirada em loja', 'Cliente orientado a retirar a segunda via em loja (correção)', '2023-11-23', 'Envio complementar'),
+(17, 4, 'Transportadora', 'Coleta para reimpressão e troca por exemplares corretos', '2023-11-24', 'Substituição'),
+(18, 3, 'Transportadora', 'Envio de amostra do papel correto para conferência', '2023-11-28', 'Envio de amostra'),
+(19, 2, 'Transportadora', 'Envio de segunda via com gramatura correta', '2023-11-28', 'Substituição'),
+(20, 4, 'Transportadora', 'Coleta do item entregue (modelo errado) para troca por modelo 2023', '2023-11-29', 'Substituição');
