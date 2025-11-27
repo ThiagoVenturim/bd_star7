@@ -1,23 +1,11 @@
 USE Garantia;
 
---INSERINDO SETORES
-INSERT INTO Setor (nome_setor, responsavel, email_do_responsavel) VALUES 
-('Suporte Técnico', 'Carlos Souza', 'carlos.souza@empresa.com'),
-('Controle de Qualidade', 'Mariana Lima', 'mariana.lima@empresa.com'),
-('Logística Reversa', 'Roberto Dias', 'roberto.dias@empresa.com'),
-('Vendas e Pós-venda', 'Fernanda Alves', 'fernanda.alves@empresa.com'),
-('Eletrônicos','Sérgio Ramos','sergio@empresa.com'),
-('Garantia','Patrícia Duarte','patricia@empresa.com'),
-('Logística','Igor Nascimento','igor@empresa.com'),
-('Análise Técnica','Evelyn Castro','evelyn@empresa.com'),
-('Reparo','Maurício Prado','mauricio@empresa.com'),
-('Despacho','Tatiane Lopes','tatiane@empresa.com'),
-('Avaliação','Ricardo Salles','ricardo@empresa.com'),
-('Troca','Joana Freitas','joana@empresa.com'),
-('Atendimento Geral','Eduardo Reis','eduardo@empresa.com'),
-('Supervisão','Helena Fagundes','helena@empresa.com');
+INSERT INTO Setor (nome_setor, responsavel, email_do_responsavel) VALUES 
+('T.I.', 'Carlos Souza', 'suporte.ti@garantia.com'),
+('Impressão', 'Roberto Dias', 'producao.impressao@garantia.com'),
+('Mídias', 'Fernanda Alves', 'midias.digitais@garantia.com'),
+('Controle de Qualidade', 'Mariana Lima', 'qualidade@garantia.com');
 
---INSERINDO Cliente
 INSERT INTO Cliente (tipo_cliente, nome_solicitante, email_solicitante, rua, endereco, bairro, cpf, cnpj, nome_fantasia) VALUES
 ('F', 'João da Silva', 'joao.silva@email.com', 'Rua das Flores', '123', 'Centro', '123.456.789-00', NULL, NULL),
 ('F', 'Maria Oliveira', 'maria.oli@email.com', 'Av. Paulista', '1000, Apt 40', 'Bela Vista', '234.567.890-11', NULL, NULL),
@@ -40,9 +28,8 @@ INSERT INTO Cliente (tipo_cliente, nome_solicitante, email_solicitante, rua, end
 ('J','Casa Verde Hortifruti','contato@casaverde.com','Rua Ipê Amarelo','144','Verdejante',NULL,'11.222.333/0001-08','Casa Verde'),
 ('J','ConstruForte Materiais','atendimento@construforte.com','Avenida Tiradentes','311','Obras',NULL,'99.555.444/0001-77','ConstruForte');
 
---INSERINDO Produto
 INSERT INTO Produto (numero_da_nota_fiscal, nome_do_produto, quantidade, data_da_entrega, foto_do_produto) VALUES
-('NF-00100', 'Livro Bernoulli', 1, '2023-10-01', ''), -- dps vai ser alterado com os links corretos
+('NF-00100', 'Livro Bernoulli - Vol 1', 1, '2023-10-01', ''),
 ('NF-00101', 'Manual Fiat - FIAT ARGO', 1, '2023-10-05', ''),
 ('NF-00102', 'Manual Fiat - FIAT CRONOS', 5, '2023-10-10', ''),
 ('NF-00103', 'Manual Fiat - FIAT DUCATO', 1, '2023-10-12', ''),
@@ -52,61 +39,57 @@ INSERT INTO Produto (numero_da_nota_fiscal, nome_do_produto, quantidade, data_da
 ('NF-00107', 'Manual Fiat - FIAT PULSE', 1, '2023-10-25', ''),
 ('NF-00108', 'Manual Fiat - FIAT SCUDO', 10, '2023-10-28', ''),
 ('NF-00109', 'Manual Fiat - FIAT Toro', 1, '2023-10-30', ''),
-('NF1021','Smart TV 55" UltraHD',1,'2025-01-11','tv55.jpg'),
-('NF1022','Notebook Gamer VX',1,'2025-01-12','notebookvx.jpg'),
-('NF1023','Máquina de Lavar 12kg',1,'2025-01-13','lavadora12.jpg'),
-('NF1024','Cafeteira Automática',2,'2025-01-14','cafeteira.jpg'),
-('NF1025','Aspirador Ciclônico',1,'2025-01-15','aspirador.jpg'),
-('NF1026','Smartphone Pro Max',1,'2025-01-16','smartphone.jpg'),
-('NF1027','Ar Condicionado 12000 BTUs',1,'2025-01-17','ar12.jpg'),
-('NF1028','Liquidificador Turbo',3,'2025-01-18','liquidificador.jpg'),
-('NF1029','Caixa de Som Surround',2,'2025-01-19','sonsurr.jpg'),
-('NF1030','Forno Elétrico 45L',1,'2025-01-20','forno.jpg');
+('NF-00110', 'Manual Fiat - FIAT STRADA', 1, '2023-11-01', ''),
+('NF-00111', 'Manual Jeep - RENEGADE', 1, '2023-11-02', ''),
+('NF-00112', 'Apostila Matemática - 2º Ano', 1, '2023-11-05', ''),
+('NF-00113', 'Apostila Português - 2º Ano', 1, '2023-11-06', ''),
+('NF-00114', 'Manual Fiat - FIAT 500e', 1, '2023-11-08', ''),
+('NF-00115', 'Manual Citroën - C3', 1, '2023-11-10', ''),
+('NF-00116', 'Manual Citroën - C4 Cactus', 2, '2023-11-12', ''),
+('NF-00117', 'Livro História do Brasil', 1, '2023-11-15', ''),
+('NF-00118', 'Manual Peugeot - 208', 1, '2023-11-18', ''),
+('NF-00119', 'Manual Peugeot - 3008', 1, '2023-11-20', '');
 
---INSERINDO Atendimento
 INSERT INTO Atendimento (numero_da_nota_fiscal, cod_cliente, id_setor, descricao_cliente, email_atendimento, data_do_atendimento, nome_atendente) VALUES
-('NF-00100', 1, 1, 'Monitor piscando intermitentemente', 'suporte@garantia.com', '2023-11-01', 'Carlos Souza'),
-('NF-00101', 2, 2, 'Produto chegou com tecla quebrada', 'logistica@garantia.com', '2023-11-02', 'Roberto Dias'),
-('NF-00102', 3, 1, 'Um dos notebooks não liga', 'suporte@garantia.com', '2023-11-03', 'Carlos Souza'),
-('NF-00103', 4, 4, 'Comprei o modelo errado, quero trocar', 'vendas@garantia.com', '2023-11-04', 'Fernanda Alves'),
-('NF-00104', 5, 2, 'Rodízio da cadeira travado', 'logistica@garantia.com', '2023-11-05', 'Roberto Dias'),
-('NF-00105', 6, 1, 'Bateria descarregando muito rápido', 'suporte@garantia.com', '2023-11-06', 'Carlos Souza'),
-('NF-00106', 7, 1, 'Impressora fazendo barulho alto', 'suporte@garantia.com', '2023-11-07', 'Julia Mendes'),
-('NF-00107', 8, 2, 'Caixa chegou amassada e fone riscado', 'logistica@garantia.com', '2023-11-08', 'Roberto Dias'),
-('NF-00108', 9, 4, 'Pedido incompleto, faltaram 2 cabos', 'vendas@garantia.com', '2023-11-09', 'Fernanda Alves'),
-('NF-00109', 10, 1, 'Imagem da webcam está rosa', 'suporte@garantia.com', '2023-11-10', 'Julia Mendes'),
-('NF1021',11,13,'Tela apagando após alguns minutos','atendimento@loja.com','2025-02-01','Marcos'),
-('NF1022',12,14,'Superaquecimento durante uso','atendimento@loja.com','2025-02-02','Letícia'),
-('NF1023',13,12,'Não centrifuga corretamente','atendimento@loja.com','2025-02-03','João'),
-('NF1024',14,11,'Vazamento interno','atendimento@loja.com','2025-02-04','Fernanda'),
-('NF1025',15,10,'Perda de sucção','atendimento@loja.com','2025-02-05','Carlos'),
-('NF1026',16,14,'Câmera não abre','atendimento@loja.com','2025-02-06','Rafaela'),
-('NF1027',17,9,'Barulho anormal','atendimento@loja.com','2025-02-07','Daniel'),
-('NF1028',18,8,'Lâminas travando','atendimento@loja.com','2025-02-08','Juliana'),
-('NF1029',19,11,'Som falhando em volumes altos','atendimento@loja.com','2025-02-09','Thiago'),
-('NF1030',20,7,'Não aquece adequadamente','atendimento@loja.com','2025-02-10','Fabiana');
+('NF-00100', 1, 4, 'Capa veio rasgada na ponta', 'qualidade@garantia.com', '2023-11-01', 'Mariana Lima'),
+('NF-00101', 2, 2, 'Páginas do meio estão em branco', 'producao.impressao@garantia.com', '2023-11-02', 'Roberto Dias'),
+('NF-00102', 3, 4, 'Solicitei 5 unidades, vieram apenas 3', 'qualidade@garantia.com', '2023-11-03', 'Mariana Lima'),
+('NF-00103', 4, 4, 'Comprei manual do Ducato, veio do Argo', 'qualidade@garantia.com', '2023-11-04', 'Mariana Lima'),
+('NF-00104', 5, 2, 'Impressão borrada nas páginas de elétrica', 'producao.impressao@garantia.com', '2023-11-05', 'Roberto Dias'),
+('NF-00105', 6, 2, 'Folhas soltando da lombada (encadernação ruim)', 'producao.impressao@garantia.com', '2023-11-06', 'Roberto Dias'),
+('NF-00106', 7, 4, 'Manual veio molhado/úmido', 'qualidade@garantia.com', '2023-11-07', 'Mariana Lima'),
+('NF-00107', 8, 4, 'Caixa amassada danificou a capa dura', 'qualidade@garantia.com', '2023-11-08', 'Mariana Lima'),
+('NF-00108', 9, 2, 'Pedido incompleto, faltou o encarte de garantia', 'producao.impressao@garantia.com', '2023-11-09', 'Roberto Dias'),
+('NF-00109', 10, 3, 'Cores da impressão invertidas (imagem rosa)', 'midias.digitais@garantia.com', '2023-11-10', 'Fernanda Alves'),
+('NF-00110', 11, 4, 'Página 50 rasgada ao meio', 'qualidade@garantia.com', '2023-11-12', 'Mariana Lima'),
+('NF-00111', 11, 4, 'Veio manual da Jeep em vez de Fiat', 'qualidade@garantia.com', '2023-11-12', 'Mariana Lima'),
+('NF-00112', 12, 3, 'Gabarito de respostas veio errado', 'midias.digitais@garantia.com', '2023-11-15', 'Fernanda Alves'),
+('NF-00113', 12, 4, 'Livro com marcas de uso (parece usado)', 'qualidade@garantia.com', '2023-11-16', 'Mariana Lima'),
+('NF-00114', 13, 2, 'Diagrama elétrico ilegível', 'producao.impressao@garantia.com', '2023-11-18', 'Roberto Dias'),
+('NF-00115', 14, 3, 'Falta índice remissivo (erro de diagramação)', 'midias.digitais@garantia.com', '2023-11-20', 'Fernanda Alves'),
+('NF-00116', 14, 4, 'Comprei 2, veio 1 manual em francês', 'qualidade@garantia.com', '2023-11-21', 'Mariana Lima'),
+('NF-00117', 15, 3, 'Erro ortográfico grosseiro na capa', 'midias.digitais@garantia.com', '2023-11-22', 'Fernanda Alves'),
+('NF-00118', 16, 2, 'Papel de gramatura inferior ao anunciado', 'producao.impressao@garantia.com', '2023-11-25', 'Roberto Dias'),
+('NF-00119', 16, 4, 'Veio modelo 2022, comprei 2023', 'qualidade@garantia.com', '2023-11-26', 'Mariana Lima');
 
-
---INSERINDO Devoluçao
 INSERT INTO Devolucao (id_atendimento, id_setor, forma_do_envio, observacoes_da_devolucao, data_da_devolucao, medida_adotada) VALUES
-(1, 1, 'Correios', 'Defeito confirmado no painel LCD', '2023-11-05', 'Troca autorizada'),
-(2, 2, 'Transportadora', 'Dano físico no transporte', '2023-11-06', 'Reembolso'),
-(3, 1, 'Transportadora', 'Falha na placa mãe', '2023-11-07', 'Reparo em garantia'),
-(4, 4, 'Correios', 'Produto lacrado, troca por modelo superior', '2023-11-08', 'Vale-troca gerado'),
-(5, 2, 'Técnico in loco', 'Substituição da base da cadeira', '2023-11-09', 'Reparo efetuado'),
-(6, 1, 'Correios', 'Bateria viciada constatada', '2023-11-10', 'Troca de aparelho'),
-(7, 1, 'Técnico in loco', 'Sujeira no toner, limpeza feita', '2023-11-11', 'Manutenção preventiva'),
-(8, 2, 'Correios', 'Produto avariado', '2023-11-12', 'Troca autorizada'),
-(9, 4, 'N/A', 'Envio dos itens faltantes', '2023-11-13', 'Envio complementar'),
-(10, 1, 'Correios', 'Sensor queimado', '2023-11-14', 'Reembolso total'),
-(11,13,'Transportadora','Equipamento com dano de fábrica','2025-03-01','Troca'),
-(12,14,'Correios','Falha confirmada em testes','2025-03-02','Reparo'),
-(13,12,'Coleta domiciliar','Ruído excessivo confirmado','2025-03-03','Reembolso'),
-(14,11,'Transportadora','Peça interna solta','2025-03-04','Troca'),
-(15,10,'Correios','Produto sem vedação','2025-03-05','Reparo'),
-(16,14,'Correios','Lente quebrada','2025-03-06','Troca'),
-(17,9,'Transportadora','Vibração extrema','2025-03-07','Reembolso'),
-(18,8,'Coleta local','Teste apontou falha mecânica','2025-03-08','Reparo'),
-(19,11,'Transportadora','Som distorcido','2025-03-09','Troca'),
-(20,7,'Correios','Resistência queimada','2025-03-10','Reembolso');
-
+(1, 4, 'Correios', 'Rasgo verificado na capa frontal', '2023-11-05', 'Troca autorizada'),
+(2, 2, 'Transportadora', 'Erro de impressão (páginas em branco)', '2023-11-06', 'Troca do produto'),
+(3, 4, 'Transportadora', 'Conferência de peso confirmou falta', '2023-11-07', 'Envio das unidades faltantes'),
+(4, 4, 'Correios', 'Produto devolvido em perfeito estado', '2023-11-08', 'Troca pelo modelo correto'),
+(5, 2, 'Técnico in loco', 'Falha gráfica confirmada nas pág 10-15', '2023-11-09', 'Substituição'),
+(6, 2, 'Correios', 'Cola da lombada ressecada', '2023-11-10', 'Troca por nova edição'),
+(7, 4, 'Técnico in loco', 'Dano por umidade confirmado', '2023-11-11', 'Reenvio imediato'),
+(8, 4, 'Correios', 'Dano na capa dura causado pelo transporte', '2023-11-12', 'Troca autorizada'),
+(9, 2, 'N/A', 'Item ausente na embalagem', '2023-11-13', 'Envio do encarte'),
+(10, 3, 'Correios', 'Erro de perfil de cor no arquivo original', '2023-11-14', 'Troca por lote corrigido'),
+(11, 4, 'Correios', 'Página rasgada confirmada', '2023-11-14', 'Troca'),
+(12, 4, 'Transportadora', 'Envio incorreto verificado', '2023-11-14', 'Correção do pedido'),
+(13, 3, 'Correios', 'Erro editorial no gabarito', '2023-11-17', 'Envio de errata/novo livro'),
+(14, 4, 'Correios', 'Marcas de manuseio constatadas', '2023-11-18', 'Troca por exemplar novo'),
+(15, 2, 'Transportadora', 'Falha na legibilidade da impressão', '2023-11-20', 'Troca'),
+(16, 3, 'Correios', 'Erro de diagramação confirmado', '2023-11-22', 'Troca'),
+(17, 4, 'Transportadora', 'Idioma incorreto verificado', '2023-11-23', 'Troca pelo PT-BR'),
+(18, 3, 'N/A', 'Erro de revisão ortográfica', '2023-11-24', 'Reembolso'),
+(19, 2, 'Correios', 'Papel fora do padrão de qualidade', '2023-11-27', 'Devolução do valor'),
+(20, 4, 'Transportadora', 'Edição desatualizada enviada', '2023-11-28', 'Envio da edição 2023');
