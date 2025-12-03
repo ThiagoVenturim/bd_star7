@@ -107,7 +107,8 @@ Essa seção apresenta o modelo conceitual. Figura 1 apresenta o diagrama entida
 
  
 
-Figura 1- Modelo Conceitual  
+Figura 1- Modelo Conceitual 
+<img width="1216" height="1061" alt="image" src="https://github.com/user-attachments/assets/3b85c32a-3378-47e0-9b31-b7c4c34965eb" />
 
 O modelo conceitual desenvolvido para o sistema de garantia da empresa Star 7 tem como objetivo representar, de forma clara e estruturada, todo o processo de atendimento e controle de garantia de produtos, abrangendo desde o registro da solicitação até a eventual devolução do item. A modelagem foi construída com base nas regras de negócio e requisitos funcionais identificados, visando garantir rastreabilidade, integridade e eficiência no gerenciamento das informações. 
 
@@ -152,7 +153,7 @@ No modelo lógico do Sistema de Garantia da Star 7, as entidades Cliente, Produt
 
 
 Figura 2- Modelo Lógico
-
+<img width="1669" height="1010" alt="image" src="https://github.com/user-attachments/assets/8d2a99bf-bb31-4245-9d44-c4c832b0af17" />
 
 
 A seguir, apresenta-se uma descrição detalhada das principais tabelas e seus relacionamentos:
@@ -178,3 +179,57 @@ Os principais relacionamentos estabelecidos no modelo lógico são:
 * Um atendimento pode gerar diversas devoluções, possibilitando o controle de múltiplos processos de retorno.
 
 Dessa forma, o modelo lógico assegura a integridade referencial entre todas as tabelas por meio do uso adequado de chaves primárias, estrangeiras e restrições de unicidade. Essa estrutura garante consistência, coerência e confiabilidade aos dados, fornecendo suporte às operações do sistema de garantia desenvolvido para a empresa Star 7.
+
+## 6 MODELO FISICO 
+
+O Modelo Físico é o estágio final da modelagem de banco de dados, sendo a representação completa e detalhada da estrutura de dados, pronta para ser implementada em um Sistema Gerenciador de Banco de Dados (SGBD) específico, como o MySQL, que foi o escolhido no seu projeto. 
+
+O que ele define: Tabelas, colunas, tipos de dados específicos do SGBD (por exemplo, VARCHAR(100), INT, DATE), chaves primárias (PRIMARY KEY), chaves estrangeiras (FOREIGN KEY), índices e restrições de integridade (como NOT NULL, UNIQUE e cláusulas CHECK). 
+
+ 
+
+* DDL (Linguagem de Definição de Dados) é um subconjunto do SQL (Structured Query Language) usado para definir e modificar a estrutura de objetos do banco de dados. 
+
+* Propósito: Criar, alterar e remover a arquitetura do banco de dados (tabelas, esquemas, índices, usuários, etc.). A DDL lida com a estrutura, não com os dados em si. 
+
+*Comandos Principais:* 
+
+* CREATE: Cria um novo objeto (e.g., CREATE TABLE, CREATE INDEX). 
+
+* ALTER: Modifica a estrutura de um objeto existente (e.g., ALTER TABLE ADD COLUMN). 
+
+* DROP: Exclui um objeto do banco de dados (e.g., DROP TABLE Cliente). 
+
+ 
+
+'CREATE DATABASE garantia; USE garantia; 
+
+CREATE TABLE Cliente ( cod_cliente INT PRIMARY KEY AUTO_INCREMENT, tipo_cliente ENUM('F', 'J') NOT NULL, nome_solicitante VARCHAR(100) NOT NULL, email_solicitante VARCHAR(100) NOT NULL, rua VARCHAR(100), endereco VARCHAR(100), bairro VARCHAR(50), cpf VARCHAR(14) UNIQUE, cnpj VARCHAR(18) UNIQUE, nome_fantasia VARCHAR(100), CONSTRAINT chk_documento CHECK ( (tipo_cliente = 'F' AND cpf IS NOT NULL AND cnpj IS NULL) OR (tipo_cliente = 'J' AND cnpj IS NOT NULL AND cpf IS NULL) ) ); 
+
+CREATE TABLE Setor( id_setor INT PRIMARY KEY AUTO_INCREMENT, nome_setor VARCHAR(100) UNIQUE NOT NULL, responsavel VARCHAR(100) NOT NULL, email_do_responsavel VARCHAR(100) NOT NULL ); 
+
+CREATE TABLE Produto ( codigo_produto INT PRIMARY KEY, numero_da_nota_fiscal VARCHAR(50) NOT NULL, nome_do_produto VARCHAR(100) NOT NULL, quantidade INT NOT NULL, data_da_entrega DATE, foto_do_produto VARCHAR(255) -- link da imagem ); 
+
+CREATE TABLE Atendimento ( id_atendimento INT PRIMARY KEY AUTO_INCREMENT, codigo_produto INT NOT NULL, cod_cliente INT NOT NULL, id_setor INT NOT NULL, descricao_cliente VARCHAR(255), email_atendimento VARCHAR(100), data_do_atendimento DATE, nome_atendente VARCHAR(100), FOREIGN KEY (codigo_produto) REFERENCES Produto(codigo_produto), FOREIGN KEY (cod_cliente) REFERENCES Cliente(cod_cliente), FOREIGN KEY (id_setor) REFERENCES Setor(id_setor) ); 
+
+CREATE TABLE Envio ( id_devolucao INT PRIMARY KEY AUTO_INCREMENT, id_atendimento INT NOT NULL, id_setor INT NOT NULL, forma_do_envio VARCHAR(100), observacoes_do_envio VARCHAR(255), data_do_envio DATE, medida_adotada VARCHAR(100), FOREIGN KEY (id_atendimento) REFERENCES Atendimento(id_atendimento), FOREIGN KEY (id_setor) REFERENCES Setor(id_setor) );' 
+
+ 
+
+ 
+
+INSERT (DML - Data Manipulation Language) 
+
+INSERT é um comando fundamental do SQL que faz parte da DML (Linguagem de Manipulação de Dados). Ele é usado para adicionar novas linhas (registros) a uma tabela em um banco de dados. 
+
+Propósito: Incluir os dados reais que o sistema irá manipular, preenchendo as tabelas criadas pela DDL 
+
+INSERT INTO Setor (nome_setor, responsavel, email_do_responsavel) VALUES ('T.I.', 'Carlos Souza', 'suporte.ti@garantia.com'), ('Impressão', 'Roberto Dias', 'producao.impressao@garantia.com'), ('Mídias', 'Fernanda Alves', 'midias.digitais@garantia.com'), ('Controle de Qualidade', 'Mariana Lima', 'qualidade@garantia.com'); 
+
+INSERT INTO Cliente (tipo_cliente, nome_solicitante, email_solicitante, rua, endereco, bairro, cpf, cnpj, nome_fantasia) VALUES ('F', 'João da Silva', 'joao.silva@email.com', 'Rua das Flores', '123', 'Centro', '123.456.789-00', NULL, NULL), ('F', 'Maria Oliveira', 'maria.oli@email.com', 'Av. Paulista', '1000, Apt 40', 'Bela Vista', '234.567.890-11', NULL, NULL), ('J', 'Tech Solutions Ltda', 'contato@techsol.com', 'Rua Inovação', '500', 'Tecnopolo', NULL, '12.345.678/0001-90', 'Tech Soluções'), ('F', 'Pedro Santos', 'pedro.santos@email.com', 'Rua do Lago', '45', 'Jardim', '345.678.901-22', NULL, NULL), ('J', 'Comércio Global SA', 'sac@comercioglobal.com', 'Av. Brasil', '2020', 'Industrial', NULL, '98.765.432/0001-10', 'Global Shop'), ('F', 'Ana Costa', 'ana.costa@email.com', 'Rua A', '12', 'Vila Nova', '456.789.012-33', NULL, NULL), ('J', 'InforPeças ME', 'gerencia@inforpecas.com', 'Rua dos Hardwares', '88', 'Centro', NULL, '11.222.333/0001-44', 'InforPeças'), ('F', 'Lucas Pereira', 'lucas.p@email.com', 'Travessa B', '9', 'São José', '567.890.123-44', NULL, NULL), ('J', 'Escritório Silva', 'adm@silvaadv.com', 'Rua da Lei', '101', 'Jurídico', NULL, '55.666.777/0001-88', 'Silva Advogados'), ('F', 'Beatriz Rocha', 'bia.rocha@email.com', 'Alameda Santos', '300', 'Jardins', '678.901.234-55', NULL, NULL), ('F','Bruna Almeida','bruna.almeida@gmail.com','Rua das Acácias','102','Centro','421.589.630-12',NULL,NULL), ('F','Thiago Monteiro','t.monteiro@gmail.com','Avenida Brasil','455','Jardim Europa','852.147.963-27',NULL,NULL), ('F','Larissa Couto','larissa.couto@gmail.com','Rua das Flores','88','Santa Luzia','369.741.258-40',NULL,NULL), ('F','Renato Barros','renato.barros@gmail.com','Avenida Paulista','900','Nova Esperança','214.785.963-11',NULL,NULL), ('F','Camila Torres','camila.torres@gmail.com','Rua do Sol','122','Vila Mariana','741.369.258-66',NULL,NULL), ('J','Mercado Bom Preço','contato@bompreco.com','Avenida Central','501','Comercial',NULL,'13.456.789/0001-55','Bom Preço'), ('J','MídiaMax Publicidade','suporte@midiamax.com','Rua Ouro Preto','233','Industrial',NULL,'22.345.678/0001-12','MídiaMax'), ('J','Auto Peças Silva','vendas@autossilva.com','Avenida Amazonas','677','Automotores',NULL,'77.888.999/0001-90','Peças Silva'), ('J','Casa Verde Hortifruti','contato@casaverde.com','Rua Ipê Amarelo','144','Verdejante',NULL,'11.222.333/0001-08','Casa Verde'), ('J','ConstruForte Materiais','atendimento@construforte.com','Avenida Tiradentes','311','Obras',NULL,'99.555.444/0001-77','ConstruForte'); 
+
+INSERT INTO Produto (codigo_produto, numero_da_nota_fiscal, nome_do_produto, quantidade, data_da_entrega, foto_do_produto) VALUES (603534050, 'NF-0001', 'Livro Bernoulli - Vol 1', 1, '2023-10-01', ''), (603534051, 'NF-0002', 'Manual Fiat - FIAT ARGO', 1, '2023-10-05', ''), (603534052, 'NF-0003', 'Manual Fiat - FIAT CRONOS', 5, '2023-10-10', ''), (603534053, 'NF-0004', 'Manual Fiat - FIAT DUCATO', 1, '2023-10-12', ''), (603534054, 'NF-0005', 'Manual Fiat - FIAT FASTBACK', 2, '2023-10-15', ''), (603534055, 'NF-0006', 'Manual Fiat - FIAT FIORINO', 1, '2023-10-20', ''), (603534056, 'NF-0007', 'Manual Fiat - FIAT MOBI', 1, '2023-10-22', ''), (603534057, 'NF-0008', 'Manual Fiat - FIAT PULSE', 1, '2023-10-25', ''), (603534058, 'NF-0009', 'Manual Fiat - FIAT SCUDO', 10, '2023-10-28', ''), (603534059, 'NF-0010', 'Manual Fiat - FIAT Toro', 1, '2023-10-30', ''), (603534060, 'NF-0011', 'Manual Fiat - FIAT STRADA', 1, '2023-11-01', ''), (603534061, 'NF-0012', 'Manual Jeep - RENEGADE', 1, '2023-11-02', ''), (603534062, 'NF-0013', 'Apostila Matemática - 2º Ano', 1, '2023-11-05', ''), (603534063, 'NF-0014', 'Apostila Português - 2º Ano', 1, '2023-11-06', ''), (603534064, 'NF-0015', 'Manual Fiat - FIAT 500e', 1, '2023-11-08', ''), (603534065, 'NF-0016', 'Manual Citroën - C3', 1, '2023-11-10', ''), (603534066, 'NF-0017', 'Manual Citroën - C4 Cactus', 2, '2023-11-12', ''), (603534067, 'NF-0018', 'Livro História do Brasil', 1, '2023-11-15', ''), (603534068, 'NF-0019', 'Manual Peugeot - 208', 1, '2023-11-18', ''), (603534069, 'NF-0020', 'Manual Peugeot - 3008', 1, '2023-11-20', ''); 
+
+* INSERT INTO Atendimento (codigo_produto, cod_cliente, id_setor, descricao_cliente, email_atendimento, data_do_atendimento, nome_atendente) VALUES (603534050, 1, 4, 'Capa veio rasgada na ponta', 'qualidade@garantia.com', '2023-11-01', 'Mariana Lima'), (603534051, 2, 2, 'Páginas do meio estão em branco', 'producao.impressao@garantia.com', '2023-11-02', 'Roberto Dias'), (603534052, 3, 4, 'Solicitei 5 unidades, vieram apenas 3', 'qualidade@garantia.com', '2023-11-03', 'Mariana Lima'), (603534053, 4, 4, 'Comprei manual do Ducato, veio do Argo', 'qualidade@garantia.com', '2023-11-04', 'Mariana Lima'), (603534054, 5, 2, 'Impressão borrada nas páginas de elétrica', 'producao.impressao@garantia.com', '2023-11-05', 'Roberto Dias'), (603534055, 6, 2, 'Folhas soltando da lombada (encadernação ruim)', 'producao.impressao@garantia.com', '2023-11-06', 'Roberto Dias'), (603534056, 7, 4, 'Manual veio molhado/úmido', 'qualidade@garantia.com', '2023-11-07', 'Mariana Lima'), (603534057, 8, 4, 'Caixa amassada danificou a capa dura', 'qualidade@garantia.com', '2023-11-08', 'Mariana Lima'), (603534058, 9, 2, 'Pedido incompleto, faltou o encarte de garantia', 'producao.impressao@garantia.com', '2023-11-09', 'Roberto Dias'), (603534059, 10, 3, 'Cores da impressão invertidas (imagem rosa)', 'midias.digitais@garantia.com', '2023-11-10', 'Fernanda Alves'), (603534060, 11, 4, 'Página 50 rasgada ao meio', 'qualidade@garantia.com', '2023-11-12', 'Mariana Lima'), (603534061, 11, 4, 'Veio manual da Jeep em vez de Fiat', 'qualidade@garantia.com', '2023-11-12', 'Mariana Lima'), (603534062, 12, 3, 'Gabarito de respostas veio errado', 'midias.digitais@garantia.com', '2023-11-15', 'Fernanda Alves'), (603534063, 12, 4, 'Livro com marcas de uso (parece usado)', 'qualidade@garantia.com', '2023-11-16', 'Mariana Lima'), (603534064, 13, 2, 'Diagrama elétrico ilegível', 'producao.impressao@garantia.com', '2023-11-18', 'Roberto Dias'), (603534065, 14, 3, 'Falta índice remissivo (erro de diagramação)', 'midias.digitais@garantia.com', '2023-11-20', 'Fernanda Alves'), (603534066, 14, 4, 'Comprei 2, veio 1 manual em francês', 'qualidade@garantia.com', '2023-11-21', 'Mariana Lima'), (603534067, 15, 3, 'Erro ortográfico grosseiro na capa', 'midias.digitais@garantia.com', '2023-11-22', 'Fernanda Alves'), (603534068, 16, 2, 'Papel de gramatura inferior ao anunciado', 'producao.impressao@garantia.com', '2023-11-25', 'Roberto Dias'), (603534069, 16, 4, 'Veio modelo 2022, comprei 2023', 'qualidade@garantia.com', '2023-11-26', 'Mariana Lima'); 
+
+* INSERT INTO Envio (id_atendimento, id_setor, forma_do_envio, observacoes_do_envio, data_do_envio, medida_adotada) VALUES (1, 4, 'Transportadora', 'Reenvio da unidade danificada por substituição', '2023-11-05', 'Reenvio de produto'), (2, 2, 'Correios - PAC', 'Envio de nova via impressa após conferência de qualidade', '2023-11-08', 'Substituição'), (3, 4, 'Retirada em loja', 'Cliente autorizou retirada de 2 unidades faltantes na filial', '2023-11-07', 'Envio complementar'), (4, 4, 'Transportadora', 'Coleta do item incorreto para devolução e substituição', '2023-11-09', 'Substituição'), (5, 2, 'Transportadora', 'Reimpressão das páginas afetadas e envio por urgência', '2023-11-10', 'Reenvio de produto'), (6, 2, 'Transportadora', 'Encaminhado para encadernação reforçada e reenvio', '2023-11-11', 'Reenvio de produto'), (7, 4, 'Transportadora', 'Produto enviado seco após secagem e revisão', '2023-11-10', 'Reenvio de produto'), (8, 4, 'Transportadora', 'Proteção adicional na embalagem e novo envio', '2023-11-12', 'Reenvio de produto'), (9, 2, 'Retirada em loja', 'Envio do encarte faltante separadamente', '2023-11-13', 'Envio complementar'), (10, 3, 'Transportadora', 'Reimpressão corrigida das páginas com problema de cores', '2023-11-14', 'Substituição'), (11, 4, 'Transportadora', 'Produto recolhido para análise (cliente recebeu outra referência)', '2023-11-16', 'Coleta para análise'), (12, 4, 'Transportadora', 'Coleta e análise — possível troca por lote correto', '2023-11-16', 'Coleta para análise'), (13, 3, 'Correios - Sedex', 'Envio da versão corrigida do gabarito', '2023-11-18', 'Substituição'), (14, 4, 'Transportadora', 'Livro inspecionado; possível reembolso se confirmar uso', '2023-11-20', 'Aguardando verificação / Reembolso'), (15, 2, 'Transportadora', 'Reimpressão do diagrama e remessa', '2023-11-22', 'Reenvio de produto'), (16, 3, 'Retirada em loja', 'Cliente orientado a retirar a segunda via em loja (correção)', '2023-11-23', 'Envio complementar'), (17, 4, 'Transportadora', 'Coleta para reimpressão e troca por exemplares corretos', '2023-11-24', 'Substituição'), (18, 3, 'Transportadora', 'Envio de amostra do papel correto para conferência', '2023-11-28', 'Envio de amostra'), (19, 2, 'Transportadora', 'Envio de segunda via com gramatura correta', '2023-11-28', 'Substituição'), (20, 4, 'Transportadora', 'Coleta do item entregue (modelo errado) para troca por modelo 2023', '2023-11-29', 'Substituição'); 
