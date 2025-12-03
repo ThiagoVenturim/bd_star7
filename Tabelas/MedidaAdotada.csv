@@ -1,0 +1,21 @@
+id_devolucao,id_atendimento,cod_cliente,nome_solicitante,codigo_produto,nome_do_produto,medida_adotada,data_do_envio
+1,1,1,"João da Silva",603534050,"Livro Bernoulli - Vol 1","Reenvio de produto",2023-11-05
+2,2,2,"Maria Oliveira",603534051,"Manual Fiat - FIAT ARGO",Substituição,2023-11-08
+3,3,3,"Tech Solutions Ltda",603534052,"Manual Fiat - FIAT CRONOS","Envio complementar",2023-11-07
+4,4,4,"Pedro Santos",603534053,"Manual Fiat - FIAT DUCATO",Substituição,2023-11-09
+5,5,5,"Comércio Global SA",603534054,"Manual Fiat - FIAT FASTBACK","Reenvio de produto",2023-11-10
+6,6,6,"Ana Costa",603534055,"Manual Fiat - FIAT FIORINO","Reenvio de produto",2023-11-11
+7,7,7,"InforPeças ME",603534056,"Manual Fiat - FIAT MOBI","Reenvio de produto",2023-11-10
+8,8,8,"Lucas Pereira",603534057,"Manual Fiat - FIAT PULSE","Reenvio de produto",2023-11-12
+9,9,9,"Escritório Silva",603534058,"Manual Fiat - FIAT SCUDO","Envio complementar",2023-11-13
+10,10,10,"Beatriz Rocha",603534059,"Manual Fiat - FIAT Toro",Substituição,2023-11-14
+11,11,11,"Bruna Almeida",603534060,"Manual Fiat - FIAT STRADA","Coleta para análise",2023-11-16
+12,12,11,"Bruna Almeida",603534061,"Manual Jeep - RENEGADE","Coleta para análise",2023-11-16
+13,13,12,"Thiago Monteiro",603534062,"Apostila Matemática - 2º Ano",Substituição,2023-11-18
+14,14,12,"Thiago Monteiro",603534063,"Apostila Português - 2º Ano","Aguardando verificação / Reembolso",2023-11-20
+15,15,13,"Larissa Couto",603534064,"Manual Fiat - FIAT 500e","Reenvio de produto",2023-11-22
+16,16,14,"Renato Barros",603534065,"Manual Citroën - C3","Envio complementar",2023-11-23
+17,17,14,"Renato Barros",603534066,"Manual Citroën - C4 Cactus",Substituição,2023-11-24
+18,18,15,"Camila Torres",603534067,"Livro História do Brasil","Envio de amostra",2023-11-28
+19,19,16,"Mercado Bom Preço",603534068,"Manual Peugeot - 208",Substituição,2023-11-28
+20,20,16,"Mercado Bom Preço",603534069,"Manual Peugeot - 3008",Substituição,2023-11-29
