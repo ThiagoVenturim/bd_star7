@@ -52,10 +52,38 @@ A empresa Star 7, multinacional que atua no desenvolvimento e gestão de conteú
 
 O presente projeto tem como objetivo o desenvolvimento de um modelo de banco de dados para o Sistema de Garantia Star 7, voltado à organização e gerenciamento de informações referentes a clientes, produtos, atendimentos, setores e devoluções. A proposta visa não apenas estruturar o armazenamento de dados, mas também representar de forma fiel as regras de negócio e os fluxos internos do processo de garantia da empresa. 
 
-Por meio da elaboração do modelo conceitual e do modelo lógico, busca-se criar uma base sólida para a futura implementação do sistema em um ambiente computacional. A modelagem permitirá compreender as relações entre as diferentes entidades envolvidas e assegurar a consistência das informações ao longo de todo o ciclo de vida de um atendimento — desde a abertura do chamado até a devolução do produto ao cliente. 
+Por meio da elaboração do modelo conceitual e do modelo lógico, busca-se criar uma base sólida para a futura implementação do sistema em um ambiente computacional. A modelagem permitirá compreender as relações entre as diferentes entidades envolvidas e assegurar a consistência das informações ao longo de todo o ciclo de vida de um atendimento desde a abertura do chamado até a devolução do produto ao cliente. 
 
 Dessa forma, o Sistema de Garantia Star 7 constitui uma solução de apoio à gestão interna da empresa, contribuindo para a padronização de processos, a melhoria da comunicação entre setores e o aumento da satisfação dos clientes, alinhando-se à missão da Star 7 de oferecer excelência, inovação e qualidade em seus serviços. 
 
+ 
+
+ 
+# 2 OBJETIVOS ESPECÍFICOS: 
+
+* Realizar o levantamento de requisitos e a compreensão do "minimundo" referente ao processo de garantia e logística reversa da empresa parceira Star 7 Latam. 
+
+* Desenvolver o Modelo Conceitual (Diagrama Entidade-Relacionamento) para estruturar as entidades de Clientes, Produtos, Atendimentos e Setores. 
+
+* Elaborar o Modelo Lógico do banco de dados, traduzindo as regras de negócio para uma estrutura tabular compatível com SGBDs relacionais. 
+
+* Efetuar visita técnica às instalações da empresa para validar os fluxos de trabalho com a equipe de TI, garantindo a aderência do projeto à realidade do mercado. 
+
+8Propor uma solução de armazenamento de dados que centralize as informações, visando reduzir inconsistências e futuros problemas. 
+
+  
+
+# 3 PÚBLICO ALVO (DESCRIÇÃO DOS BENEFICIÁRIOS DIRETOS): 
+
+O público-alvo compreende a equipe técnica e operacional da empresa parceira Star 7 Latam. Os beneficiários diretos são os colaboradores alocados nos departamentos envolvidos no fluxo de garantia modelado no projeto: o setor de Tecnologia da Informação (responsável pela implementação), Controle de Qualidade, Logística (Envio/Recebimento) e as áreas de Publicação Técnica e Editorial. O projeto visa dar um maior controle sobre o sistema de garantia no trabalho diário desses profissionais e a através da estruturação eficiente dos dados. 
+
+ 
+
+# 4 NÚMERO DE BENEFICIÁRIOS DIRETOS: 
+
+80 Pessoas. O número refere-se à estimativa de colaboradores da Star 7 Latam que atuam diretamente nos setores mapeados durante a visita técnica (TI, Qualidade, Logística e Publicação) e que seriam usuários diretos do sistema de banco de dados proposto. 
+
+ 
 ---
 
 <div id='Empresa'/>  
@@ -181,38 +209,123 @@ Os principais relacionamentos estabelecidos no modelo lógico são:
 Dessa forma, o modelo lógico assegura a integridade referencial entre todas as tabelas por meio do uso adequado de chaves primárias, estrangeiras e restrições de unicidade. Essa estrutura garante consistência, coerência e confiabilidade aos dados, fornecendo suporte às operações do sistema de garantia desenvolvido para a empresa Star 7.
 
 ## 6 MODELO FISICO 
-
 O Modelo Físico é o estágio final da modelagem de banco de dados, sendo a representação completa e detalhada da estrutura de dados, pronta para ser implementada em um Sistema Gerenciador de Banco de Dados (SGBD) específico, como o MySQL, que foi o escolhido no seu projeto. 
 
 O que ele define: Tabelas, colunas, tipos de dados específicos do SGBD (por exemplo, VARCHAR(100), INT, DATE), chaves primárias (PRIMARY KEY), chaves estrangeiras (FOREIGN KEY), índices e restrições de integridade (como NOT NULL, UNIQUE e cláusulas CHECK). 
 
  
 
-* DDL (Linguagem de Definição de Dados) é um subconjunto do SQL (Structured Query Language) usado para definir e modificar a estrutura de objetos do banco de dados. 
+DDL (Linguagem de Definição de Dados) é um subconjunto do SQL (Structured Query Language) usado para definir e modificar a estrutura de objetos do banco de dados. 
 
-* Propósito: Criar, alterar e remover a arquitetura do banco de dados (tabelas, esquemas, índices, usuários, etc.). A DDL lida com a estrutura, não com os dados em si. 
+Propósito: Criar, alterar e remover a arquitetura do banco de dados (tabelas, esquemas, índices, usuários, etc.). A DDL lida com a estrutura, não com os dados em si. 
 
-*Comandos Principais:* 
+Comandos Principais: 
 
-* CREATE: Cria um novo objeto (e.g., CREATE TABLE, CREATE INDEX). 
+CREATE: Cria um novo objeto (e.g., CREATE TABLE, CREATE INDEX). 
 
-* ALTER: Modifica a estrutura de um objeto existente (e.g., ALTER TABLE ADD COLUMN). 
+ALTER: Modifica a estrutura de um objeto existente (e.g., ALTER TABLE ADD COLUMN). 
 
-* DROP: Exclui um objeto do banco de dados (e.g., DROP TABLE Cliente). 
+DROP: Exclui um objeto do banco de dados (e.g., DROP TABLE Cliente). 
 
  
 
-'CREATE DATABASE garantia; USE garantia; 
+CREATE DATABASE garantia; USE garantia; 
 
-CREATE TABLE Cliente ( cod_cliente INT PRIMARY KEY AUTO_INCREMENT, tipo_cliente ENUM('F', 'J') NOT NULL, nome_solicitante VARCHAR(100) NOT NULL, email_solicitante VARCHAR(100) NOT NULL, rua VARCHAR(100), endereco VARCHAR(100), bairro VARCHAR(50), cpf VARCHAR(14) UNIQUE, cnpj VARCHAR(18) UNIQUE, nome_fantasia VARCHAR(100), CONSTRAINT chk_documento CHECK ( (tipo_cliente = 'F' AND cpf IS NOT NULL AND cnpj IS NULL) OR (tipo_cliente = 'J' AND cnpj IS NOT NULL AND cpf IS NULL) ) ); 
+CREATE TABLE Cliente(  
 
-CREATE TABLE Setor( id_setor INT PRIMARY KEY AUTO_INCREMENT, nome_setor VARCHAR(100) UNIQUE NOT NULL, responsavel VARCHAR(100) NOT NULL, email_do_responsavel VARCHAR(100) NOT NULL ); 
+cod_cliente INT PRIMARY KEY AUTO_INCREMENT,  
 
-CREATE TABLE Produto ( codigo_produto INT PRIMARY KEY, numero_da_nota_fiscal VARCHAR(50) NOT NULL, nome_do_produto VARCHAR(100) NOT NULL, quantidade INT NOT NULL, data_da_entrega DATE, foto_do_produto VARCHAR(255) -- link da imagem ); 
+tipo_cliente ENUM('F', 'J') NOT NULL,  
 
-CREATE TABLE Atendimento ( id_atendimento INT PRIMARY KEY AUTO_INCREMENT, codigo_produto INT NOT NULL, cod_cliente INT NOT NULL, id_setor INT NOT NULL, descricao_cliente VARCHAR(255), email_atendimento VARCHAR(100), data_do_atendimento DATE, nome_atendente VARCHAR(100), FOREIGN KEY (codigo_produto) REFERENCES Produto(codigo_produto), FOREIGN KEY (cod_cliente) REFERENCES Cliente(cod_cliente), FOREIGN KEY (id_setor) REFERENCES Setor(id_setor) ); 
+nome_solicitante VARCHAR(100) NOT NULL,  
 
-CREATE TABLE Envio ( id_devolucao INT PRIMARY KEY AUTO_INCREMENT, id_atendimento INT NOT NULL, id_setor INT NOT NULL, forma_do_envio VARCHAR(100), observacoes_do_envio VARCHAR(255), data_do_envio DATE, medida_adotada VARCHAR(100), FOREIGN KEY (id_atendimento) REFERENCES Atendimento(id_atendimento), FOREIGN KEY (id_setor) REFERENCES Setor(id_setor) );' 
+email_solicitante VARCHAR(100) NOT NULL, 
+
+rua VARCHAR(100),  
+
+endereco VARCHAR(100), 
+
+ bairro VARCHAR(50), 
+
+cpf VARCHAR(14) UNIQUE,  
+
+cnpj VARCHAR(18) UNIQUE,  
+
+nome_fantasia VARCHAR(100),  
+
+CONSTRAINT chk_documento CHECK ( (tipo_cliente = 'F' AND cpf IS NOT NULL AND cnpj IS NULL) OR (tipo_cliente = 'J' AND cnpj IS NOT NULL AND cpf IS NULL) )  
+
+); 
+
+CREATE TABLE Setor(  
+
+id_setor INT PRIMARY KEY AUTO_INCREMENT,  
+
+nome_setor VARCHAR(100) UNIQUE NOT NULL, 
+
+responsavel VARCHAR(100) NOT NULL,  
+
+email_do_responsavel VARCHAR(100) NOT NULL  
+
+); 
+
+CREATE TABLE Produto (  
+
+codigo_produto INT PRIMARY KEY,  
+
+numero_da_nota_fiscal VARCHAR(50) NOT NULL,  
+
+nome_do_produto VARCHAR(100) NOT NULL,  
+
+quantidade INT NOT NULL,  
+
+data_da_entrega DATE,  
+
+foto_do_produto VARCHAR(255) -- link da imagem 
+
+ ); 
+
+CREATE TABLE Atendimento (  
+
+id_atendimento INT PRIMARY KEY AUTO_INCREMENT,  
+
+codigo_produto INT NOT NULL,  
+
+cod_cliente INT NOT NULL,  
+
+id_setor INT NOT NULL,  
+
+descricao_cliente VARCHAR(255), 
+
+email_atendimento VARCHAR(100),  
+
+data_do_atendimento DATE,  
+
+nome_atendente VARCHAR(100), 
+
+FOREIGN KEY (codigo_produto) REFERENCES Produto(codigo_produto), FOREIGN KEY (cod_cliente) REFERENCES Cliente(cod_cliente), FOREIGN KEY (id_setor) REFERENCES Setor(id_setor)  
+
+); 
+
+CREATE TABLE Envio (  
+
+id_devolucao INT PRIMARY KEY AUTO_INCREMENT,  
+
+id_atendimento INT NOT NULL,  
+
+id_setor INT NOT NULL,  
+
+forma_do_envio VARCHAR(100),  
+
+observacoes_do_envio VARCHAR(255),  
+
+data_do_envio DATE,  
+
+medida_adotada VARCHAR(100),  
+
+FOREIGN KEY (id_atendimento) REFERENCES Atendimento(id_atendimento), FOREIGN KEY (id_setor) REFERENCES Setor(id_setor)  
+
+); 
 
  
 
@@ -226,10 +339,413 @@ Propósito: Incluir os dados reais que o sistema irá manipular, preenchendo as 
 
 INSERT INTO Setor (nome_setor, responsavel, email_do_responsavel) VALUES ('T.I.', 'Carlos Souza', 'suporte.ti@garantia.com'), ('Impressão', 'Roberto Dias', 'producao.impressao@garantia.com'), ('Mídias', 'Fernanda Alves', 'midias.digitais@garantia.com'), ('Controle de Qualidade', 'Mariana Lima', 'qualidade@garantia.com'); 
 
-INSERT INTO Cliente (tipo_cliente, nome_solicitante, email_solicitante, rua, endereco, bairro, cpf, cnpj, nome_fantasia) VALUES ('F', 'João da Silva', 'joao.silva@email.com', 'Rua das Flores', '123', 'Centro', '123.456.789-00', NULL, NULL), ('F', 'Maria Oliveira', 'maria.oli@email.com', 'Av. Paulista', '1000, Apt 40', 'Bela Vista', '234.567.890-11', NULL, NULL), ('J', 'Tech Solutions Ltda', 'contato@techsol.com', 'Rua Inovação', '500', 'Tecnopolo', NULL, '12.345.678/0001-90', 'Tech Soluções'), ('F', 'Pedro Santos', 'pedro.santos@email.com', 'Rua do Lago', '45', 'Jardim', '345.678.901-22', NULL, NULL), ('J', 'Comércio Global SA', 'sac@comercioglobal.com', 'Av. Brasil', '2020', 'Industrial', NULL, '98.765.432/0001-10', 'Global Shop'), ('F', 'Ana Costa', 'ana.costa@email.com', 'Rua A', '12', 'Vila Nova', '456.789.012-33', NULL, NULL), ('J', 'InforPeças ME', 'gerencia@inforpecas.com', 'Rua dos Hardwares', '88', 'Centro', NULL, '11.222.333/0001-44', 'InforPeças'), ('F', 'Lucas Pereira', 'lucas.p@email.com', 'Travessa B', '9', 'São José', '567.890.123-44', NULL, NULL), ('J', 'Escritório Silva', 'adm@silvaadv.com', 'Rua da Lei', '101', 'Jurídico', NULL, '55.666.777/0001-88', 'Silva Advogados'), ('F', 'Beatriz Rocha', 'bia.rocha@email.com', 'Alameda Santos', '300', 'Jardins', '678.901.234-55', NULL, NULL), ('F','Bruna Almeida','bruna.almeida@gmail.com','Rua das Acácias','102','Centro','421.589.630-12',NULL,NULL), ('F','Thiago Monteiro','t.monteiro@gmail.com','Avenida Brasil','455','Jardim Europa','852.147.963-27',NULL,NULL), ('F','Larissa Couto','larissa.couto@gmail.com','Rua das Flores','88','Santa Luzia','369.741.258-40',NULL,NULL), ('F','Renato Barros','renato.barros@gmail.com','Avenida Paulista','900','Nova Esperança','214.785.963-11',NULL,NULL), ('F','Camila Torres','camila.torres@gmail.com','Rua do Sol','122','Vila Mariana','741.369.258-66',NULL,NULL), ('J','Mercado Bom Preço','contato@bompreco.com','Avenida Central','501','Comercial',NULL,'13.456.789/0001-55','Bom Preço'), ('J','MídiaMax Publicidade','suporte@midiamax.com','Rua Ouro Preto','233','Industrial',NULL,'22.345.678/0001-12','MídiaMax'), ('J','Auto Peças Silva','vendas@autossilva.com','Avenida Amazonas','677','Automotores',NULL,'77.888.999/0001-90','Peças Silva'), ('J','Casa Verde Hortifruti','contato@casaverde.com','Rua Ipê Amarelo','144','Verdejante',NULL,'11.222.333/0001-08','Casa Verde'), ('J','ConstruForte Materiais','atendimento@construforte.com','Avenida Tiradentes','311','Obras',NULL,'99.555.444/0001-77','ConstruForte'); 
+INSERT INTO Cliente (tipo_cliente, nome_solicitante, email_solicitante, rua, endereco, bairro, cpf, cnpj, nome_fantasia) VALUES  
 
-INSERT INTO Produto (codigo_produto, numero_da_nota_fiscal, nome_do_produto, quantidade, data_da_entrega, foto_do_produto) VALUES (603534050, 'NF-0001', 'Livro Bernoulli - Vol 1', 1, '2023-10-01', ''), (603534051, 'NF-0002', 'Manual Fiat - FIAT ARGO', 1, '2023-10-05', ''), (603534052, 'NF-0003', 'Manual Fiat - FIAT CRONOS', 5, '2023-10-10', ''), (603534053, 'NF-0004', 'Manual Fiat - FIAT DUCATO', 1, '2023-10-12', ''), (603534054, 'NF-0005', 'Manual Fiat - FIAT FASTBACK', 2, '2023-10-15', ''), (603534055, 'NF-0006', 'Manual Fiat - FIAT FIORINO', 1, '2023-10-20', ''), (603534056, 'NF-0007', 'Manual Fiat - FIAT MOBI', 1, '2023-10-22', ''), (603534057, 'NF-0008', 'Manual Fiat - FIAT PULSE', 1, '2023-10-25', ''), (603534058, 'NF-0009', 'Manual Fiat - FIAT SCUDO', 10, '2023-10-28', ''), (603534059, 'NF-0010', 'Manual Fiat - FIAT Toro', 1, '2023-10-30', ''), (603534060, 'NF-0011', 'Manual Fiat - FIAT STRADA', 1, '2023-11-01', ''), (603534061, 'NF-0012', 'Manual Jeep - RENEGADE', 1, '2023-11-02', ''), (603534062, 'NF-0013', 'Apostila Matemática - 2º Ano', 1, '2023-11-05', ''), (603534063, 'NF-0014', 'Apostila Português - 2º Ano', 1, '2023-11-06', ''), (603534064, 'NF-0015', 'Manual Fiat - FIAT 500e', 1, '2023-11-08', ''), (603534065, 'NF-0016', 'Manual Citroën - C3', 1, '2023-11-10', ''), (603534066, 'NF-0017', 'Manual Citroën - C4 Cactus', 2, '2023-11-12', ''), (603534067, 'NF-0018', 'Livro História do Brasil', 1, '2023-11-15', ''), (603534068, 'NF-0019', 'Manual Peugeot - 208', 1, '2023-11-18', ''), (603534069, 'NF-0020', 'Manual Peugeot - 3008', 1, '2023-11-20', ''); 
+('F', 'João da Silva', 'joao.silva@email.com', 'Rua das Flores', '123', 'Centro', '123.456.789-00', NULL, NULL),  
 
-* INSERT INTO Atendimento (codigo_produto, cod_cliente, id_setor, descricao_cliente, email_atendimento, data_do_atendimento, nome_atendente) VALUES (603534050, 1, 4, 'Capa veio rasgada na ponta', 'qualidade@garantia.com', '2023-11-01', 'Mariana Lima'), (603534051, 2, 2, 'Páginas do meio estão em branco', 'producao.impressao@garantia.com', '2023-11-02', 'Roberto Dias'), (603534052, 3, 4, 'Solicitei 5 unidades, vieram apenas 3', 'qualidade@garantia.com', '2023-11-03', 'Mariana Lima'), (603534053, 4, 4, 'Comprei manual do Ducato, veio do Argo', 'qualidade@garantia.com', '2023-11-04', 'Mariana Lima'), (603534054, 5, 2, 'Impressão borrada nas páginas de elétrica', 'producao.impressao@garantia.com', '2023-11-05', 'Roberto Dias'), (603534055, 6, 2, 'Folhas soltando da lombada (encadernação ruim)', 'producao.impressao@garantia.com', '2023-11-06', 'Roberto Dias'), (603534056, 7, 4, 'Manual veio molhado/úmido', 'qualidade@garantia.com', '2023-11-07', 'Mariana Lima'), (603534057, 8, 4, 'Caixa amassada danificou a capa dura', 'qualidade@garantia.com', '2023-11-08', 'Mariana Lima'), (603534058, 9, 2, 'Pedido incompleto, faltou o encarte de garantia', 'producao.impressao@garantia.com', '2023-11-09', 'Roberto Dias'), (603534059, 10, 3, 'Cores da impressão invertidas (imagem rosa)', 'midias.digitais@garantia.com', '2023-11-10', 'Fernanda Alves'), (603534060, 11, 4, 'Página 50 rasgada ao meio', 'qualidade@garantia.com', '2023-11-12', 'Mariana Lima'), (603534061, 11, 4, 'Veio manual da Jeep em vez de Fiat', 'qualidade@garantia.com', '2023-11-12', 'Mariana Lima'), (603534062, 12, 3, 'Gabarito de respostas veio errado', 'midias.digitais@garantia.com', '2023-11-15', 'Fernanda Alves'), (603534063, 12, 4, 'Livro com marcas de uso (parece usado)', 'qualidade@garantia.com', '2023-11-16', 'Mariana Lima'), (603534064, 13, 2, 'Diagrama elétrico ilegível', 'producao.impressao@garantia.com', '2023-11-18', 'Roberto Dias'), (603534065, 14, 3, 'Falta índice remissivo (erro de diagramação)', 'midias.digitais@garantia.com', '2023-11-20', 'Fernanda Alves'), (603534066, 14, 4, 'Comprei 2, veio 1 manual em francês', 'qualidade@garantia.com', '2023-11-21', 'Mariana Lima'), (603534067, 15, 3, 'Erro ortográfico grosseiro na capa', 'midias.digitais@garantia.com', '2023-11-22', 'Fernanda Alves'), (603534068, 16, 2, 'Papel de gramatura inferior ao anunciado', 'producao.impressao@garantia.com', '2023-11-25', 'Roberto Dias'), (603534069, 16, 4, 'Veio modelo 2022, comprei 2023', 'qualidade@garantia.com', '2023-11-26', 'Mariana Lima'); 
+('F', 'Maria Oliveira', 'maria.oli@email.com', 'Av. Paulista', '1000, Apt 40', 'Bela Vista', '234.567.890-11', NULL, NULL), 
 
-* INSERT INTO Envio (id_atendimento, id_setor, forma_do_envio, observacoes_do_envio, data_do_envio, medida_adotada) VALUES (1, 4, 'Transportadora', 'Reenvio da unidade danificada por substituição', '2023-11-05', 'Reenvio de produto'), (2, 2, 'Correios - PAC', 'Envio de nova via impressa após conferência de qualidade', '2023-11-08', 'Substituição'), (3, 4, 'Retirada em loja', 'Cliente autorizou retirada de 2 unidades faltantes na filial', '2023-11-07', 'Envio complementar'), (4, 4, 'Transportadora', 'Coleta do item incorreto para devolução e substituição', '2023-11-09', 'Substituição'), (5, 2, 'Transportadora', 'Reimpressão das páginas afetadas e envio por urgência', '2023-11-10', 'Reenvio de produto'), (6, 2, 'Transportadora', 'Encaminhado para encadernação reforçada e reenvio', '2023-11-11', 'Reenvio de produto'), (7, 4, 'Transportadora', 'Produto enviado seco após secagem e revisão', '2023-11-10', 'Reenvio de produto'), (8, 4, 'Transportadora', 'Proteção adicional na embalagem e novo envio', '2023-11-12', 'Reenvio de produto'), (9, 2, 'Retirada em loja', 'Envio do encarte faltante separadamente', '2023-11-13', 'Envio complementar'), (10, 3, 'Transportadora', 'Reimpressão corrigida das páginas com problema de cores', '2023-11-14', 'Substituição'), (11, 4, 'Transportadora', 'Produto recolhido para análise (cliente recebeu outra referência)', '2023-11-16', 'Coleta para análise'), (12, 4, 'Transportadora', 'Coleta e análise — possível troca por lote correto', '2023-11-16', 'Coleta para análise'), (13, 3, 'Correios - Sedex', 'Envio da versão corrigida do gabarito', '2023-11-18', 'Substituição'), (14, 4, 'Transportadora', 'Livro inspecionado; possível reembolso se confirmar uso', '2023-11-20', 'Aguardando verificação / Reembolso'), (15, 2, 'Transportadora', 'Reimpressão do diagrama e remessa', '2023-11-22', 'Reenvio de produto'), (16, 3, 'Retirada em loja', 'Cliente orientado a retirar a segunda via em loja (correção)', '2023-11-23', 'Envio complementar'), (17, 4, 'Transportadora', 'Coleta para reimpressão e troca por exemplares corretos', '2023-11-24', 'Substituição'), (18, 3, 'Transportadora', 'Envio de amostra do papel correto para conferência', '2023-11-28', 'Envio de amostra'), (19, 2, 'Transportadora', 'Envio de segunda via com gramatura correta', '2023-11-28', 'Substituição'), (20, 4, 'Transportadora', 'Coleta do item entregue (modelo errado) para troca por modelo 2023', '2023-11-29', 'Substituição'); 
+('J', 'Tech Solutions Ltda', 'contato@techsol.com', 'Rua Inovação', '500', 'Tecnopolo', NULL, '12.345.678/0001-90', 'Tech Soluções'), 
+
+('F', 'Pedro Santos', 'pedro.santos@email.com', 'Rua do Lago', '45', 'Jardim', '345.678.901-22', NULL, NULL),  
+
+('J', 'Comércio Global SA', 'sac@comercioglobal.com', 'Av. Brasil', '2020', 'Industrial', NULL, '98.765.432/0001-10', 'Global Shop'), 
+
+('F', 'Ana Costa', 'ana.costa@email.com', 'Rua A', '12', 'Vila Nova', '456.789.012-33', NULL, NULL),  
+
+('J', 'InforPeças ME', 'gerencia@inforpecas.com', 'Rua dos Hardwares', '88', 'Centro', NULL, '11.222.333/0001-44', 'InforPeças'),  
+
+('F', 'Lucas Pereira', 'lucas.p@email.com', 'Travessa B', '9', 'São José', '567.890.123-44', NULL, NULL),  
+
+('J', 'Escritório Silva', 'adm@silvaadv.com', 'Rua da Lei', '101', 'Jurídico', NULL, '55.666.777/0001-88', 'Silva Advogados'),  
+
+('F', 'Beatriz Rocha', 'bia.rocha@email.com', 'Alameda Santos', '300', 'Jardins', '678.901.234-55', NULL, NULL),  
+
+('F','Bruna Almeida','bruna.almeida@gmail.com','Rua das Acácias','102','Centro','421.589.630-12',NULL,NULL),  
+
+('F','Thiago Monteiro','t.monteiro@gmail.com','Avenida Brasil','455','Jardim Europa','852.147.963-27',NULL,NULL), 
+
+('F','Larissa Couto','larissa.couto@gmail.com','Rua das Flores','88','Santa Luzia','369.741.258-40',NULL,NULL),  
+
+('F','Renato Barros','renato.barros@gmail.com','Avenida Paulista','900','Nova Esperança','214.785.963-11',NULL,NULL), 
+
+('F','Camila Torres','camila.torres@gmail.com','Rua do Sol','122','Vila Mariana','741.369.258-66',NULL,NULL),  
+
+('J','Mercado Bom Preço','contato@bompreco.com','Avenida Central','501','Comercial',NULL,'13.456.789/0001-55','Bom Preço'), 
+
+('J','MídiaMax Publicidade','suporte@midiamax.com','Rua Ouro Preto','233','Industrial',NULL,'22.345.678/0001-12','MídiaMax'),  
+
+('J','Auto Peças Silva','vendas@autossilva.com','Avenida Amazonas','677','Automotores',NULL,'77.888.999/0001-90','Peças Silva'),  
+
+('J','Casa Verde Hortifruti','contato@casaverde.com','Rua Ipê Amarelo','144','Verdejante',NULL,'11.222.333/0001-08','Casa Verde'),  
+
+('J','ConstruForte Materiais','atendimento@construforte.com','Avenida Tiradentes','311','Obras',NULL,'99.555.444/0001-77','ConstruForte'); 
+
+INSERT INTO Produto (codigo_produto, numero_da_nota_fiscal, nome_do_produto, quantidade, data_da_entrega, foto_do_produto) VALUES  
+
+(603534050, 'NF-0001', 'Livro Bernoulli - Vol 1', 1, '2023-10-01', ''), 
+
+ (603534051, 'NF-0002', 'Manual Fiat - FIAT ARGO', 1, '2023-10-05', ''), 
+
+ (603534052, 'NF-0003', 'Manual Fiat - FIAT CRONOS', 5, '2023-10-10', ''), 
+
+(603534053, 'NF-0004', 'Manual Fiat - FIAT DUCATO', 1, '2023-10-12', ''), 
+
+(603534054, 'NF-0005', 'Manual Fiat - FIAT FASTBACK', 2, '2023-10-15', ''),  
+
+(603534055, 'NF-0006', 'Manual Fiat - FIAT FIORINO', 1, '2023-10-20', ''),  
+
+(603534056, 'NF-0007', 'Manual Fiat - FIAT MOBI', 1, '2023-10-22', ''),  
+
+(603534057, 'NF-0008', 'Manual Fiat - FIAT PULSE', 1, '2023-10-25', ''),  
+
+(603534058, 'NF-0009', 'Manual Fiat - FIAT SCUDO', 10, '2023-10-28', ''),  
+
+(603534059, 'NF-0010', 'Manual Fiat - FIAT Toro', 1, '2023-10-30', ''),  
+
+(603534060, 'NF-0011', 'Manual Fiat - FIAT STRADA', 1, '2023-11-01', ''),  
+
+(603534061, 'NF-0012', 'Manual Jeep - RENEGADE', 1, '2023-11-02', ''),  
+
+(603534062, 'NF-0013', 'Apostila Matemática - 2º Ano', 1, '2023-11-05', ''),  
+
+(603534063, 'NF-0014', 'Apostila Português - 2º Ano', 1, '2023-11-06', ''),  
+
+(603534064, 'NF-0015', 'Manual Fiat - FIAT 500e', 1, '2023-11-08', ''),  
+
+(603534065, 'NF-0016', 'Manual Citroën - C3', 1, '2023-11-10', ''),  
+
+(603534066, 'NF-0017', 'Manual Citroën - C4 Cactus', 2, '2023-11-12', ''),  
+
+(603534067, 'NF-0018', 'Livro História do Brasil', 1, '2023-11-15', ''),  
+
+(603534068, 'NF-0019', 'Manual Peugeot - 208', 1, '2023-11-18', ''),  
+
+(603534069, 'NF-0020', 'Manual Peugeot - 3008', 1, '2023-11-20', ''); 
+
+INSERT INTO Atendimento (codigo_produto, cod_cliente, id_setor, descricao_cliente, email_atendimento, data_do_atendimento, nome_atendente) VALUES  
+
+(603534050, 1, 4, 'Capa veio rasgada na ponta', 'qualidade@garantia.com', '2023-11-01', 'Mariana Lima'), 
+
+(603534051, 2, 2, 'Páginas do meio estão em branco', 'producao.impressao@garantia.com', '2023-11-02', 'Roberto Dias'), 
+
+(603534052, 3, 4, 'Solicitei 5 unidades, vieram apenas 3', 'qualidade@garantia.com', '2023-11-03', 'Mariana Lima'),  
+
+(603534053, 4, 4, 'Comprei manual do Ducato, veio do Argo', 'qualidade@garantia.com', '2023-11-04', 'Mariana Lima'),  
+
+(603534054, 5, 2, 'Impressão borrada nas páginas de elétrica', 'producao.impressao@garantia.com', '2023-11-05', 'Roberto Dias'), 
+
+(603534055, 6, 2, 'Folhas soltando da lombada (encadernação ruim)', 'producao.impressao@garantia.com', '2023-11-06', 'Roberto Dias'), 
+
+(603534056, 7, 4, 'Manual veio molhado/úmido', 'qualidade@garantia.com', '2023-11-07', 'Mariana Lima'), 
+
+(603534057, 8, 4, 'Caixa amassada danificou a capa dura', 'qualidade@garantia.com', '2023-11-08', 'Mariana Lima'),  
+
+(603534058, 9, 2, 'Pedido incompleto, faltou o encarte de garantia', 'producao.impressao@garantia.com', '2023-11-09', 'Roberto Dias'),  
+
+(603534059, 10, 3, 'Cores da impressão invertidas (imagem rosa)', 'midias.digitais@garantia.com', '2023-11-10', 'Fernanda Alves'),  
+
+(603534060, 11, 4, 'Página 50 rasgada ao meio', 'qualidade@garantia.com', '2023-11-12', 'Mariana Lima'),  
+
+(603534061, 11, 4, 'Veio manual da Jeep em vez de Fiat', 'qualidade@garantia.com', '2023-11-12', 'Mariana Lima'),  
+
+(603534062, 12, 3, 'Gabarito de respostas veio errado', 'midias.digitais@garantia.com', '2023-11-15', 'Fernanda Alves'),  
+
+(603534063, 12, 4, 'Livro com marcas de uso (parece usado)', 'qualidade@garantia.com', '2023-11-16', 'Mariana Lima'),  
+
+(603534064, 13, 2, 'Diagrama elétrico ilegível', 'producao.impressao@garantia.com', '2023-11-18', 'Roberto Dias'),  
+
+(603534065, 14, 3, 'Falta índice remissivo (erro de diagramação)', 'midias.digitais@garantia.com', '2023-11-20', 'Fernanda Alves'),  
+
+(603534066, 14, 4, 'Comprei 2, veio 1 manual em francês', 'qualidade@garantia.com', '2023-11-21', 'Mariana Lima'),  
+
+(603534067, 15, 3, 'Erro ortográfico grosseiro na capa', 'midias.digitais@garantia.com', '2023-11-22', 'Fernanda Alves'),  
+
+(603534068, 16, 2, 'Papel de gramatura inferior ao anunciado', 'producao.impressao@garantia.com', '2023-11-25', 'Roberto Dias'),  
+
+(603534069, 16, 4, 'Veio modelo 2022, comprei 2023', 'qualidade@garantia.com', '2023-11-26', 'Mariana Lima'); 
+
+INSERT INTO Envio (id_atendimento, id_setor, forma_do_envio, observacoes_do_envio, data_do_envio, medida_adotada) VALUES  
+
+(1, 4, 'Transportadora', 'Reenvio da unidade danificada por substituição', '2023-11-05', 'Reenvio de produto'),  
+
+(2, 2, 'Correios - PAC', 'Envio de nova via impressa após conferência de qualidade', '2023-11-08', 'Substituição'),  
+
+(3, 4, 'Retirada em loja', 'Cliente autorizou retirada de 2 unidades faltantes na filial', '2023-11-07', 'Envio complementar'),  
+
+(4, 4, 'Transportadora', 'Coleta do item incorreto para devolução e substituição', '2023-11-09', 'Substituição'),  
+
+(5, 2, 'Transportadora', 'Reimpressão das páginas afetadas e envio por urgência', '2023-11-10', 'Reenvio de produto'),  
+
+(6, 2, 'Transportadora', 'Encaminhado para encadernação reforçada e reenvio', '2023-11-11', 'Reenvio de produto'),  
+
+(7, 4, 'Transportadora', 'Produto enviado seco após secagem e revisão', '2023-11-10', 'Reenvio de produto'),  
+
+(8, 4, 'Transportadora', 'Proteção adicional na embalagem e novo envio', '2023-11-12', 'Reenvio de produto'),  
+
+(9, 2, 'Retirada em loja', 'Envio do encarte faltante separadamente', '2023-11-13', 'Envio complementar'),  
+
+(10, 3, 'Transportadora', 'Reimpressão corrigida das páginas com problema de cores', '2023-11-14', 'Substituição'),  
+
+(11, 4, 'Transportadora', 'Produto recolhido para análise (cliente recebeu outra referência)', '2023-11-16', 'Coleta para análise'), 
+
+(12, 4, 'Transportadora', 'Coleta e análise — possível troca por lote correto', '2023-11-16', 'Coleta para análise'),  
+
+(13, 3, 'Correios - Sedex', 'Envio da versão corrigida do gabarito', '2023-11-18', 'Substituição'),  
+
+(14, 4, 'Transportadora', 'Livro inspecionado; possível reembolso se confirmar uso', '2023-11-20', 'Aguardando verificação / Reembolso'), 
+
+(15, 2, 'Transportadora', 'Reimpressão do diagrama e remessa', '2023-11-22', 'Reenvio de produto'),  
+
+(16, 3, 'Retirada em loja', 'Cliente orientado a retirar a segunda via em loja (correção)', '2023-11-23', 'Envio complementar'),  
+
+(17, 4, 'Transportadora', 'Coleta para reimpressão e troca por exemplares corretos', '2023-11-24', 'Substituição'),  
+
+(18, 3, 'Transportadora', 'Envio de amostra do papel correto para conferência', '2023-11-28', 'Envio de amostra'),  
+
+(19, 2, 'Transportadora', 'Envio de segunda via com gramatura correta', '2023-11-28', 'Substituição'),  
+
+(20, 4, 'Transportadora', 'Coleta do item entregue (modelo errado) para troca por modelo 2023', '2023-11-29', 'Substituição'); 
+
+ 
+
+ 
+
+CONSULTAS 
+
+ 
+
+As consultas SQL apresentadas foram desenvolvidas com o objetivo de gerar relatórios e métricas de desempenho para o Sistema de Garantia Star 7, utilizando os dados simulados inseridos anteriormente (comandos INSERT). 
+
+Cada bloco de consulta segue a ordem: Pergunta, Consulta SQL e a Análise do Resultado com base nos dados simulados. 
+
+1. Clientes que Mais Acionaram a Garantia 
+
+Pergunta: Quais clientes acionaram mais vezes a garantia em ordem decrescente? 
+
+Consulta SQL: 
+
+SQL 
+
+SELECT c.cod_cliente, c.nome_solicitante, COUNT(a.id_atendimento) AS total_acionamentos  
+
+FROM Atendimento a JOIN Cliente c ON a.cod_cliente = c.cod_cliente GROUP BY c.cod_cliente, c.nome_solicitante  
+
+ORDER BY total_acionamentos DESC; 
+
+ 
+
+ 
+ 
+
+ 
+
+Análise do Resultado (Baseado nos 10 INSERTs de Atendimento): Esta consulta faz um agrupamento dos atendimentos por cliente (GROUP BY) e conta o número de ocorrências. Como cada um dos 10 clientes simulados registrou exatamente um atendimento, o resultado mostraria todos os clientes com o valor 1 na contagem, listados alfabeticamente ou por cod_cliente (já que a contagem é igual para todos), exceto se houver um empate no critério de desempate implícito no SGBD. 
+
+Esperado: Todos os 10 clientes com total_acionamentos = 1. 
+
+ 
+
+2. Tipo de Cliente que Mais Aciona a Garantia 
+
+Pergunta: Qual tipo de cliente aciona mais a garantia? 
+
+Consulta SQL: 
+
+SQL 
+
+SELECT c.tipo_cliente, COUNT(a.id_atendimento) AS total_acionamentos 
+FROM Atendimento a 
+JOIN Cliente c ON a.cod_cliente = c.cod_cliente 
+GROUP BY c.tipo_cliente 
+ORDER BY total_acionamentos DESC; 
+
+ 
+
+ 
+ 
+
+nálise do Resultado (Baseado nos 10 INSERTs de Cliente e Atendimento): A consulta agrupa os atendimentos pelo tipo de cliente (F para Físico e J para Jurídico). 
+
+Os dados simulados têm 6 Clientes Físicos (cods 1, 2, 4, 6, 8, 10). 
+
+Os dados simulados têm 4 Clientes Jurídicos (cods 3, 5, 7, 9). 
+
+Esperado: O tipo F (Físico) terá 6 acionamentos e o tipo J (Jurídico) terá 4 acionamentos, indicando que o Cliente Físico acionou mais a garantia no período simulado. 
+
+ 
+
+ 
+
+3. Garantias Acionadas em um Período Específico 
+
+Pergunta: Quais são as garantias acionadas no período entre XX/XX/XXXX - XX/XX/XXXX. 
+
+Consulta SQL: 
+
+SQL 
+
+SELECT a.id_atendimento, a.data_do_atendimento, c.nome_solicitante, p.nome_do_produto, s.nome_setor  
+
+FROM Atendimento a JOIN Cliente c ON a.cod_cliente = c.cod_cliente  
+
+JOIN Produto p ON a.codigo_produto = p.codigo_produto  
+
+JOIN Setor s ON a.id_setor = s.id_setor WHERE a.data_do_atendimento  
+
+BETWEEN '2023-11-01' AND '2023-11-30' ORDER BY a.data_do_atendimento; 
+
+ 
+
+ 
+ 
+
+Análise do Resultado (Baseado nos 10 INSERTs de Atendimento): Essa consulta busca todos os atendimentos que caíram dentro do intervalo de datas especificado. Como todos os 10 atendimentos simulados foram inseridos com datas entre '2023-11-01' e '2023-11-10', o resultado listaria todos eles, fornecendo uma visão completa dos chamados no mês de novembro de 2023. 
+
+ 
+
+4. Setores que Mais Respondem a Solicitações 
+
+Pergunta: Quais os setores que mais respondem a solicitações de garantia em ordem decrescente? 
+
+Consulta SQL: 
+
+SQL 
+
+SELECT s.id_setor, s.nome_setor, COUNT(a.id_atendimento) AS total_atendimentos 
+FROM Atendimento a 
+JOIN Setor s ON a.id_setor = s.id_setor 
+GROUP BY s.id_setor, s.nome_setor 
+ORDER BY total_atendimentos DESC; 
+
+ 
+ 
+
+Análise do Resultado (Baseado nos 10 INSERTs de Atendimento): A consulta agrupa os atendimentos pelo setor responsável para determinar qual área interna lida com o maior volume de chamados. 
+
+Setor 1 (Suporte Técnico): Lida com 5 atendimentos (cods 1, 3, 6, 7, 10). 
+
+Setor 2 (Controle de Qualidade/Logística Reversa): Lida com 3 atendimentos (cods 2, 5, 8). 
+
+Setor 4 (Vendas e Pós-venda): Lida com 2 atendimentos (cods 4, 9). 
+
+Esperado: Suporte Técnico (5) liderando, seguido por Logística (3) e Vendas (2). 
+
+ 
+
+5. Produtos Defeituosos em Maior Quantidade 
+
+Pergunta: Quais os produtos defeituosos em maior quantidade e seus departamentos? 
+
+Consulta SQL: 
+
+SQL 
+
+SELECT p.codigo_produto, p.nome_do_produto, s.nome_setor, COUNT(a.id_atendimento) AS total_defeitos FROM Atendimento a JOIN Produto p ON a.codigo_produto = p.codigo_produto JOIN Setor s ON a.id_setor = s.id_setor GROUP BY p.codigo_produto, p.nome_do_produto, s.nome_setor ORDER BY total_defeitos DESC; 
+
+ 
+
+ 
+ 
+
+Análise do Resultado (Baseado nos 10 INSERTs de Produto e Atendimento): Esta consulta identifica produtos que geraram múltiplos acionamentos (defeitos), agrupando-os por nome e setor. Como cada um dos 10 produtos simulados gerou exatamente um atendimento, o resultado mostraria todos os produtos com total_defeitos = 1, listados em ordem, junto ao setor que inicialmente analisou o caso. 
+
+ 
+
+6. Medida Adotada por Atendimento 
+
+Pergunta: Qual a medida adotada por cada atendimento? Mostre também o identificador e nome do cliente e produto em questão. 
+
+Consulta SQL: 
+
+SQL 
+
+SELECT e.id_devolucao, a.id_atendimento, c.cod_cliente, c.nome_solicitante, p.codigo_produto, p.nome_do_produto, e.medida_adotada, e.data_do_envio  
+
+FROM Envio e  
+
+JOIN Atendimento a ON e.id_atendimento = a.id_atendimento  
+
+JOIN Cliente c ON a.cod_cliente = c.cod_cliente  
+
+JOIN Produto p ON a.codigo_produto = p.codigo_produto  
+
+ORDER BY e.id_devolucao; 
+
+ 
+
+ 
+
+Análise do Resultado (Baseado nos 10 INSERTs de Devolução): O resultado desta consulta é uma lista detalhada que conecta o ciclo completo de garantia: qual produto (nome_do_produto) de qual cliente (nome_solicitante) gerou um atendimento, e qual foi a solução final registrada na devolução (medida_adotada). 
+
+ 
+
+ 
+
+ 
+
+10 VISITA TÉCNICA, REUNIÃO E PARCERIA COM A STAR7 LATAM 
+
+O desenvolvimento deste projeto de Banco de Dados não se limitou ao ambiente acadêmico. Ele foi construído em estreita colaboração com a realidade do mercado, por meio de diversas reuniões e, fundamentalmente, com uma visita técnica à unidade gráfica da STAR7 Latam. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Essa imersão, realizada por nosso grupo do projeto extensionista da PUC Minas, proporcionou uma visão completa do minimundo a ser modelado, abrangendo todo o fluxo produtivo da divisão "Fulfillment & Printing", desde as impressoras de alta capacidade até a complexa operação logística de distribuição de conteúdo técnico e editorial para grandes marcas globais. 
+
+ 
+
+ reuniao 6 de outubro de 2025 
+
+ 
+
+ 
+
+reuniao 27 de novembro de 2025 
+
+Relevância da Colaboração 
+
+A STAR7 Latam é uma multinacional líder em gestão e distribuição de informações, cuja operação exige um pilar robusto de Gestão de Qualidade. A escala e a complexidade do seu trabalho — que inclui uma capacidade de produção superior a 20 milhões de impressões mensais e soluções logísticas integradas — tornaram a gestão de garantia um desafio ideal para a aplicação prática dos conhecimentos de modelagem de dados. 
+
+A parceria e as informações coletadas durante a visita foram essenciais para: 
+
+Validação do Minimundo: Garantir que a descrição do processo de garantia (entidades, atributos e regras) refletisse fielmente as operações reais da empresa. 
+
+Contextualização: Compreender como a falha em um produto (origem da garantia) se insere no fluxo logístico e de produção da STAR7. 
+
+Orientação Estratégica: Alinhar o modelo do banco de dados para que ele pudesse não apenas registrar o histórico, mas também servir como uma base estratégica para futuras evoluções, como a implementação de dashboards de Business Intelligence (BI). 
+
+Nosso grupo expressa imensa gratidão à STAR7 Latam pela oportunidade de aprendizado e, em especial, ao Wanderson, profissional da área de TI da empresa, que nos recebeu de forma excepcional. Esta experiência reforçou o valor da conexão entre a teoria aprendida no curso e os desafios reais do mercado. 
+
+11 CONCLUSÃO 
+
+O desenvolvimento do Sistema de Garantia para a Star 7 demonstrou como a modelagem de dados é essencial para compreender, organizar e estruturar processos internos de uma empresa que lida com um grande volume de informações. A partir da análise do minimundo, foi possível identificar os principais elementos do processo de garantia — clientes, produtos, atendimentos, setores e devoluções — e traduzi-los de forma precisa para os modelos conceitual e lógico. 
+
+O modelo conceitual permitiu visualizar as entidades e seus relacionamentos de forma abstrata, garantindo uma compreensão clara das regras de negócio. Já o modelo lógico transformou essa estrutura em tabelas e restrições relacionais adequadas para implementação futura, assegurando integridade, consistência e rastreabilidade dos dados. 
+
+Com isso, o sistema proposto oferece uma base sólida para informatizar o processo de garantia da Star 7, trazendo benefícios como centralização das informações, maior organização, agilidade na comunicação entre setores e confiabilidade na tomada de decisões. O projeto evidencia que a modelagem de dados não apenas formaliza o conhecimento sobre o domínio, mas também prepara o terreno para a construção de soluções tecnológicas eficientes e alinhadas às necessidades reais da empresa. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+# APÊNDICE 
+
+ 
+
+ 
+
+https://github.com/ThiagoVenturim/bd_star7 
+
+ 
