@@ -1,0 +1,39 @@
+unit Principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.jpeg,
+  Vcl.Menus;
+
+type
+  TuPrincipal = class(TForm)
+    imgPrincipal: TImage;
+    mmPrincipal: TMainMenu;
+    Sair1: TMenuItem;
+    CadastroCliente1: TMenuItem;
+    CadastroCliente2: TMenuItem;
+    CadastroCliente3: TMenuItem;
+    CadastroAtendente1: TMenuItem;
+    procedure Sair1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  uPrincipal: TuPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TuPrincipal.Sair1Click(Sender: TObject);
+begin
+  Close;
+end;
+
+end.

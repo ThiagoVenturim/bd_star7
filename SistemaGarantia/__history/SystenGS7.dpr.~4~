@@ -1,0 +1,15 @@
+program SystenGS7;
+
+uses
+  Vcl.Forms,
+  Principal in 'Principal.pas' {uPrincipal},
+  uLogin in 'uLogin.pas' {Login};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TuPrincipal, uPrincipal);
+  Application.Run;
+end.

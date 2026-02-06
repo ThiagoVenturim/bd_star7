@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2026/02/06 16:42:04.876,=C:\Users\thiag\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/02/06 16:43:39.142,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.dfm=C:\Users\thiag\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2026/02/06 16:43:39.142,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.pas=C:\Users\thiag\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2026/02/06 16:44:24.645,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\SystenGS7.dproj=C:\Users\thiag\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2026/02/06 16:47:08.716,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Principal.dfm=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.dfm</Transaction>
+    <Transaction>2026/02/06 16:47:08.716,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Principal.pas=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.pas</Transaction>
+    <Transaction>2026/02/06 16:55:04.102,=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.pas</Transaction>
+    <Transaction>2026/02/06 16:56:17.692,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\uLogin.dfm=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.dfm</Transaction>
+    <Transaction>2026/02/06 16:56:17.692,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\uLogin.pas=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.pas</Transaction>
+    <Transaction>2026/02/06 17:15:07.594,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\uLogin.pas=</Transaction>
+    <Transaction>2026/02/06 17:23:18.085,=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.pas</Transaction>
+    <Transaction>2026/02/06 17:26:34.813,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\uLogin.dfm=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.dfm</Transaction>
+    <Transaction>2026/02/06 17:26:34.813,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\uLogin.pas=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.pas</Transaction>
+    <Transaction>2026/02/06 17:27:37.853,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\uConsulta.dfm=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\uLogin.dfm</Transaction>
+    <Transaction>2026/02/06 17:27:37.853,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\uConsulta.pas=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\uLogin.pas</Transaction>
+    <Transaction>2026/02/06 17:30:13.671,=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.pas</Transaction>
+    <Transaction>2026/02/06 17:30:48.705,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\uDMConsulta.dfm=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.dfm</Transaction>
+    <Transaction>2026/02/06 17:30:48.705,C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\uDMConsulta.pas=C:\Users\thiag\OneDrive\Área de Trabalho\Projetos\Projeto Web\bd_star7\SistemaGarantia\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

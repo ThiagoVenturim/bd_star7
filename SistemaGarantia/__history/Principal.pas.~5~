@@ -1,0 +1,25 @@
+unit Principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.jpeg;
+
+type
+  TuPrincipal = class(TForm)
+    imgPrincipal: TImage;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  uPrincipal: TuPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+end.

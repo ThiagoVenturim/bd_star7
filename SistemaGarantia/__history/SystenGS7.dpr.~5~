@@ -1,0 +1,16 @@
+program SystenGS7;
+
+uses
+  Vcl.Forms,
+  Principal in 'Principal.pas' {uPrincipal},
+  uLogin in 'uLogin.pas' {FConsulta};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TuPrincipal, uPrincipal);
+  Application.CreateForm(TFConsulta, FConsulta);
+  Application.Run;
+end.

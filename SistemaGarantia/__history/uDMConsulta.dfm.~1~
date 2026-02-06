@@ -1,0 +1,8 @@
+object DataModule1: TDataModule1
+  Height = 480
+  Width = 640
+  object DataSource1: TDataSource
+    Left = 536
+    Top = 168
+  end
+end
